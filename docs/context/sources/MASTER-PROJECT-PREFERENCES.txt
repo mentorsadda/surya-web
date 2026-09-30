@@ -1,0 +1,481 @@
+**यह मास्टर प्रॉम्प्ट MyDose और Nisha Pandey—दोनों की उपलब्ध पुरानी बातचीत और आपके बार-बार बताए सुधारों को जोड़कर बनाया है।** इसमें welcome emails, हर section का design, scroll animation, admin, CRM, uploads, data सुरक्षा और commerce की ज़रूरतें शामिल हैं।
+
+इसे नई बातचीत में पेस्ट करें और सबसे नीचे नए प्रोजेक्ट की जानकारी भर दें। यह ChatGPT से पहले एक पूरा **काम करवाने योग्य project prompt** तैयार करवाएगा।
+
+तुम मेरे Project Planner, UI/UX Designer और Technical Specification Writer की तरह काम करो।
+
+नीचे मेरी स्थायी पसंद और पिछले projects से सीखी गई requirements दी हैं। इनका इस्तेमाल करके मेरे अगले project के लिए एक स्पष्ट, विस्तृत और सीधे implementation में इस्तेमाल होने वाला MASTER BUILD PROMPT तैयार करो।
+
+मेरा उद्देश्य है कि मुझे बाद में छोटी-छोटी ज़रूरी चीज़ें अलग से बार-बार न बतानी पड़ें। पहला implementation ही अधिकतम complete, visually polished और practically functional होना चाहिए।
+
+## 1. सबसे पहले प्रोजेक्ट को समझो
+
+- दिए गए business brief, references, images और existing project को ध्यान से समझो।
+- Existing project होने पर उसके stack, database, features और design को पहले inspect करने की requirement रखो।
+- काम कर रहे project को बिना आवश्यकता rewrite न करवाओ।
+- केवल वही essential questions एक साथ पूछो जिनके उत्तर से scope, business rules या architecture बदलेंगे।
+- साधारण design और implementation decisions खुद समझदारी से तय करो।
+- जानकारी नहीं मिली हो तो assumption स्पष्ट लिखो; invented facts को approved requirement मत बनाओ।
+- मेरी latest correction को पुराने निर्देश से अधिक प्राथमिकता दो।
+- हर requirement को page, section, admin control, backend behavior और verification से जोड़ो।
+- अलग-अलग business modules को relevant होने पर शामिल करो। Personal-brand website में अनावश्यक inventory या employee system मत जोड़ो।
+
+## 2. मेरी स्थायी design preferences
+
+मुझे premium, सुंदर, साफ और उपयोग में आसान design चाहिए।
+
+- पूरी website और admin में consistent colors, typography, spacing, buttons, inputs और cards हों।
+- बड़ी, आसानी से पढ़ी जाने वाली typography हो। बहुत छोटा या हल्का text नहीं।
+- Headings, paragraphs, images और CTAs की clear hierarchy हो।
+- पर्याप्त breathing space हो; content को छोटे boxes में ठूँसना नहीं।
+- Desktop, laptop, tablet, iPhone, Android और foldable widths पर layout सही हो।
+- Screen की उपलब्ध width सही इस्तेमाल हो; दाईं तरफ बेवजह खाली हिस्सा या horizontal overflow न हो।
+- Heading alignment और image alignment अलग-अलग ध्यान से तय हों।
+- सभी form fields की height, border, padding और alignment consistent हों।
+- Dropdown उसी input से जुड़ा हुआ खुले; scroll, animation या positioning की वजह से दूर नीचे न दिखाई दे।
+- Dropdown keyboard और touch से भी ठीक चले।
+- Website और admin दोनों में text contrast अच्छा हो।
+- Generic icons, heavy boxes, बहुत ज्यादा cards, तेज neon effects और unnecessary decoration से बचो।
+- जहाँ icon अर्थ स्पष्ट करता हो, वहीं सही icon इस्तेमाल करो।
+
+## 3. Branding और navigation
+
+- सही logo header, footer और emails में इस्तेमाल हो।
+- Logo साफ दिखे, crop गलत न हो और unwanted background rectangle न बने।
+- जहाँ reference में fade दिया हो, वहाँ subtle fade इस्तेमाल करो।
+- Navigation में readable menu text, hover effect और active section/page indication हो।
+- Sticky navigation के ऊपर unwanted gap न रहे।
+- Hero और navigation के बीच अनावश्यक खाली जगह न हो।
+- Glass/blurred navbar चुना जाए तो content फिर भी readable रहे।
+- Mobile menu और drawer पूरी तरह functional हों।
+- Button hover में जरूरत के अनुसार smooth left-to-right effect हो।
+- Footer में “Powered by Connect Adda” को https://connectadda.com से link करो, जब नए brief में कोई अलग निर्देश न हो।
+
+## 4. Images और visual treatment
+
+- मेरे दिए हुए वास्तविक photos और product images को प्राथमिकता दो।
+- किसी व्यक्ति का चेहरा, पहचान या product packaging अनावश्यक रूप से मत बदलो।
+- Portrait में सिर या चेहरा crop न हो।
+- किसी भी section में text व्यक्ति के चेहरे के ऊपर न आए।
+- Desktop और mobile के लिए अलग focal position/crop की व्यवस्था हो।
+- Portrait और background naturally merge हों; photo चिपकाए हुए sticker जैसी न लगे।
+- Fade image के किनारों पर हो, चेहरे पर नहीं।
+- Image से content की तरफ gradient transition smooth हो।
+- Large empty black areas या गलत background fill न रहे।
+- Missing decorative visuals जरूरत अनुसार बनाए जा सकते हैं, लेकिन उन्हें वास्तविक व्यक्ति, customer result या प्रमाण की तरह प्रस्तुत न करो।
+- High visual quality के साथ कम file size, responsive dimensions और appropriate modern formats इस्तेमाल हों।
+- Above-the-fold hero जल्दी दिखे; बाकी images और video previews समझदारी से load हों।
+
+## 5. Hero और scroll animation का पूरा व्यवहार
+
+“Scroll animation जोड़ दो” जैसी अधूरी requirement मत लिखो। हर animation का behavior स्पष्ट करो।
+
+- Multiple hero scenes हों तो हर image का अलग relevant heading, message और CTA हो।
+- Scroll-controlled hero में scenes एक ही screen/viewport में smoothly transition करें।
+- खासकर mobile पर scenes अलग-अलग लंबे sections में बदलकर नीचे न चले जाएँ, यदि intended behavior pinned storytelling है।
+- Scroll आगे करने पर animation आगे और reverse scroll पर पीछे सही चले।
+- Image, heading, description, badges और active indicator synchronized रहें।
+- Fade, masking, parallax, scale और depth का इस्तेमाल restrained हो।
+- Scene timing और scroll ranges स्पष्ट हों; custom timing होने पर उसे preserve करो।
+- Below-fold sections viewport में आने पर reveal हों।
+- Dynamic CMS से जोड़े गए sections पर भी reveal काम करे।
+- Page में अनावश्यक लंबा blank scroll या content jumps न बनें।
+- Resize, orientation change और route change पर animation खराब न हो।
+- Mobile animation हल्की लेकिन intended experience के अनुरूप हो।
+- Reduced-motion preference पर readable static या simplified version मिले।
+- Animation विफल होने पर content invisible न रह जाए।
+- Golden glow हो तो धीमा, soft glow/pulse हो; latest brief में हटाई गई line वापस न जोड़ो।
+- Product-specific instructions सुरक्षित रखो—जैसे coffee image को zoom न करना और केवल steam animate करना।
+- Cinematic effects के लिए जरूरी assets नहीं हैं तो gap बताओ; missing effect को complete मत कहो।
+
+## 6. हर section के लिए स्पष्ट specification
+
+चुने गए प्रत्येक section में यह सब लिखो:
+
+1. Section का उद्देश्य।
+2. Heading, supporting text और CTA।
+3. Desktop layout।
+4. Mobile/tablet layout।
+5. Image/video की जरूरत और placement।
+6. Scroll, hover, click और expanded state।
+7. Admin से क्या edit होगा।
+8. कौन-सा data कहाँ save होगा।
+9. Loading, empty, error और success states।
+10. उस section को complete मानने की शर्त।
+
+Personal-brand projects के लिए जरूरत अनुसार:
+
+- Hero
+- About और full story/read-more page
+- Journey/timeline
+- Purpose और opportunities
+- Achievements/impact
+- Speaking/training
+- Events और event detail pages
+- Gallery/lightbox
+- Social/reels
+- Testimonials
+- Blog और article pages
+- Newsletter
+- Inquiry/booking/contact
+- WhatsApp/community
+- Footer और relevant policy pages
+
+इन सबको हर project में जबरदस्ती मत जोड़ो। Final brief में हटाए गए sections hidden/disabled रहें।
+
+## 7. Interactive sections, social media और testimonials
+
+- Topic/icon पर click करने से उसी topic का सही detailed content animation के साथ खुले।
+- Active icon और selected state साफ दिखें।
+- Community का destination WhatsApp हो तो उचित WhatsApp icon और actual link हो।
+- Reels में मेरे दिए हुए exact videos ही दिखें; random videos नहीं।
+- Play action जहाँ supported हो वहीं embedded video चलाए।
+- “Watch on Instagram” जैसे external action अलग हों।
+- Embed उपलब्ध न हो तो स्पष्ट fallback दो।
+- Multiple reels desktop पर neat row/slider और mobile पर usable layout में हों।
+- Social publishing चाहिए तो actual account connection, required settings और connection status शामिल हों।
+- केवल social URL save होने को publishing integration complete मत कहो।
+- Testimonials में desktop पर 3–4 readable cards दिख सकें और detail click पर खुले।
+- Testimonial add, edit, publish और unpublish admin से हो।
+- वास्तविक customer evidence नहीं है तो fabricated testimonials या statistics को real बनाकर publish न करो।
+
+## 8. Complete admin और CMS
+
+Admin सिर्फ दिखने वाला dashboard नहीं होना चाहिए।
+
+- Public website के सभी प्रमुख headings, text, images, videos, links, CTAs, contact details और SEO fields editable हों।
+- Sections को enable/disable और reorder किया जा सके।
+- Repeated content के लिए add/edit/delete और उचित draft/publish controls हों।
+- Save करने पर database में data persist हो और public page पर सही बदलाव आए।
+- Page refresh और server restart के बाद बदलाव न खोएँ।
+- Admin website की visual theme से मेल खाए।
+- Admin में बड़े readable fonts, dark text और clear controls हों।
+- Tables में जरूरत अनुसार search, filters, sorting, pagination और export हों।
+- Empty dashboard में fake numbers न दिखें।
+- प्रत्येक visible button का real action हो।
+- Success message तभी दिखे जब action वास्तव में सफल हो।
+- Errors उपयोगी भाषा में दिखें।
+
+## 9. Media upload और image editor
+
+जहाँ image बदल सकती है, वहाँ:
+
+- Upload button।
+- Crop और preview।
+- Recommended dimensions और aspect ratio।
+- File size/type guidance।
+- Upload progress और useful error।
+- Replace/remove controls।
+- Alt text और caption जहाँ लागू हों।
+- Save के बाद image बनी रहे; refresh पर गायब न हो।
+- Optimized image और सही permanent URL इस्तेमाल हो।
+- Brand और relevant keywords के आधार पर meaningful filename बने; keyword stuffing नहीं।
+- Existing pages में इस्तेमाल हो रही image delete करने से पहले dependency समझी जाए।
+- Media library से assets reuse किए जा सकें।
+
+## 10. Leads, inquiry, newsletter और CRM
+
+- Inquiry form, newsletter और website popup से आने वाले contacts एक unified Leads area में आएँ।
+- हर lead का source स्पष्ट हो: inquiry, newsletter, popup, event, manual या import।
+- नाम, phone, email, city, inquiry type, message, date और source जैसे relevant fields हों।
+- Manual Add Lead और CSV import/export हो।
+- Import में field mapping, validation और duplicate handling हो।
+- Search, filter, tags, notes, assigned person और follow-up date हों।
+- जरूरत अनुसार New, Contacted, Follow-up, Interested, Converted, Closed जैसे statuses हों।
+- Individual और selected leads के लिए compose/send controls हों।
+- Mailing eligibility, unsubscribe और suppression status सुरक्षित रहें।
+- Popup configurable delay पर दिखे, mobile पर usable हो और dismiss किया जा सके।
+- Submit या dismiss होने के बाद बेवजह लगातार परेशान न करे।
+- Form submission सही database record और सही follow-up flow बनाए।
+
+## 11. Welcome letter और email system
+
+कम से कम इन use cases को अलग संभालो:
+
+1. Newsletter subscription welcome।
+2. Inquiry thank-you।
+3. Lead/popup registration welcome।
+4. New blog notification।
+5. Admin से manually composed email।
+
+हर applicable email में:
+
+- सही brand logo।
+- सही portrait/product visual।
+- Personalized greeting और name missing होने पर fallback।
+- Short, engaging opening।
+- “यहाँ आपको क्या मिलेगा” जैसी उपयोगी जानकारी।
+- Personal connection/help section।
+- Clear website या relevant page CTA।
+- वास्तविक published blogs के image previews।
+- Branded signature और footer।
+- Marketing mail में unsubscribe/preferences।
+
+Design requirements:
+
+- Premium और personal feel।
+- कम लेकिन उपयोगी content।
+- पर्याप्त spacing।
+- Photo naturally background में merge हो।
+- Face साफ दिखे।
+- Heading/photo का placement reference के अनुसार हो।
+- Long raw URLs के बजाय clean buttons या text links हों।
+- Blog cards में actual image, title और “Read Story” CTA हो।
+- Desktop पर side-by-side cards, mobile पर stacked layout हो।
+- Decorative feature icons केवल तभी हों जब requested हों।
+- Signature हर email में हो, including Leads → Compose से भेजा mail।
+- केवल unsupported web font पर निर्भर मत रहो; readable fallback हो।
+- Email-compatible markup और Gmail, Apple Mail, Outlook/mobile के लिए safe fallbacks हों।
+- जहाँ live client testing उपलब्ध न हो, limitation बताओ।
+
+Content preservation:
+
+- यदि मैंने “content मत बदलना” कहा है तो wording जस की तस रखो।
+- केवल layout, colors, typography, spacing और image treatment बदलो।
+- नए content के लिए concise, hook-style लेकिन ईमानदार भाषा लिखो।
+
+Operational requirements:
+
+- Template preview, test email और editable subject/preheader हों।
+- Email settings का connection/test status दिखे।
+- Send Welcome, Send Campaign और multi-email actions वास्तव में काम करें।
+- तीन अलग emails चुने हों तो तीनों की individual status दिखाई दे।
+- Queued, sent, failed और skipped recipients की counts हों।
+- Duplicate sending protection हो।
+- Intentional resend/force resend का स्पष्ट control हो और action log हो।
+- Force resend unsubscribe या suppression को bypass न करे।
+- Failed emails retry किए जा सकें।
+- Provider ने message accept किया है या delivery confirm हुई है—दोनों को अलग बताओ।
+- Real recipients को भेजना current project authorization या admin action के अनुसार हो।
+
+## 12. Blog और content publishing
+
+- Blog listing और article pages website के theme में हों।
+- Featured images संबंधित article की हों।
+- Reference माँगे तो title के साथ poster-style blog artwork हो।
+- Hindi/English content की जरूरत हो तो स्पष्ट language toggle हो।
+- Categories, tags, excerpt, author, read time और relevant dates हों।
+- Draft, preview, schedule, publish और unpublish उपलब्ध हों।
+- Featured image Save के बाद persist करे।
+- Related articles, share links, newsletter और community CTA जहाँ उचित हों।
+- Publishing dates factual हों; fake history मत बनाओ।
+- Blog notifications में duplicate sends न हों।
+- Scheduled publishing requested हो तो timezone, frequency, approval mode और failure handling define करो।
+- AI-generated content को configured review/publishing policy के अनुसार चलाओ।
+
+## 13. Analytics और SEO
+
+- Visitors, sessions, page views, traffic sources, referrer/UTM, devices और top pages।
+- Inquiry, newsletter, WhatsApp और CTA conversions।
+- Date filters और meaningful charts।
+- City/country केवल reliable available data से; unknown को unknown दिखाओ।
+- Unnecessary sensitive tracking न हो।
+- Semantic headings, metadata, canonical URLs, sitemap, robots, Open Graph और suitable structured data।
+- हर blog/product/event का individual SEO।
+- Descriptive image filenames और alt text।
+- Business-relevant keywords naturally इस्तेमाल हों।
+- Search या AI-search में guaranteed ranking का दावा नहीं।
+- Lighthouse/Core Web Vitals के अच्छे scores target करो, लेकिन measured result ही report करो।
+- SEO या performance के नाम पर content readability और business usability खराब न हो।
+
+## 14. Login, permissions और data persistence
+
+- User, employee, editor, admin और super-admin roles जरूरत अनुसार हों।
+- Login के बाद सही role dashboard खुले।
+- Super-admin को defined higher-level controls मिलें; गलती से normal user dashboard न खुले।
+- Permission checks server पर enforce हों।
+- Password reset का real email flow हो।
+- Credentials hard-code या public expose न हों।
+- Local और live environment की configuration स्पष्ट हो।
+
+सबसे जरूरी:
+
+- Redeploy पर existing leads, content, uploaded media, orders और settings delete न हों।
+- Password change के बाद deployment उसे default password पर reset न करे।
+- Durable database और suitable persistent media storage हो।
+- Migrations existing data को सुरक्षित रखें।
+- Seed/demo data production records को overwrite न करे।
+- Backup और restore की practical व्यवस्था हो।
+- Secrets सुरक्षित हों।
+- Authentication, input validation, spam protection, rate limits और audit logs हों।
+- “कोई hack नहीं कर सकता” जैसे absolute दावे न करो।
+
+## 15. Commerce module — केवल relevant projects में
+
+- Product price, name, images और details का एक authoritative source हो।
+- एक जगह update करने पर cards, detail pages, cart और checkout में consistency रहे।
+- Existing order/invoice की historical price नई price से न बदले।
+- Product links valid हों।
+- Detail page में features, benefits, ingredients/specifications, usage, FAQs और relevant information हो।
+- Product claims verified evidence पर आधारित हों।
+- Real cart, checkout, order lifecycle, invoice और customer order history हो।
+- Payment integration में test/live modes, server verification, webhooks और duplicate protection हों।
+- Razorpay, PhonePe या चुने गए providers के लिए secure admin configuration हो।
+- API keys save कर देना payment verification complete नहीं है।
+- Payment failure, cancellation और refund behavior स्पष्ट हो।
+
+Rewards/referrals होने पर:
+
+- Referral links और registration attribution।
+- Configurable reward rules।
+- Customer points balance और history।
+- Checkout redemption।
+- Admin management और audited adjustments।
+- Order lifecycle के उचित stage पर points credit।
+- Cancellation/refund पर सही reversal।
+- Duplicate credits, repeated refunds और negative balances से सुरक्षा।
+- Customer, employee और admin views में consistent data।
+
+## 16. Inventory, finance और employees — जरूरत होने पर
+
+Health/supplement inventory के लिए:
+
+- Product classification के अनुसार relevant fields।
+- Batch/lot, manufacture/expiry, HSN, supplier, cost और stock movement।
+- Purchase से sale तक batch traceability।
+- पहले expire होने वाला eligible stock पहले allocate हो।
+- Expired, quarantined और recalled stock sale/dispatch से block हो।
+- Unverified legacy stock को verified बताकर न बेचो।
+- Opening-stock reconciliation।
+- Low-stock, expiry और low-margin alerts।
+- Customer credit limit, outstanding amount, due date और receipt records।
+- Reports में वास्तविक usable/sellable stock हो।
+- Weather/market-based suggestions माँगे जाएँ तो sources, dates और uncertainty स्पष्ट हों।
+
+Employee management के लिए:
+
+- Employee profile, role और invite flow।
+- Attendance/check-in/check-out और history।
+- Admin-configurable office location/radius।
+- Location-based attendance में permission, timestamp और available location accuracy record हो।
+- Suspicious attendance flags हों; GPS को पूर्ण fraud-proof प्रमाण न मानो।
+- Authorized corrections और audit history हों।
+
+## 17. AI और external integrations
+
+- AI provider/model और supported settings एक central area में हों।
+- Blog drafts, SEO suggestions, email drafts और lead summaries जैसे relevant features हों।
+- Generate, edit, review और approved publish/send flows हों।
+- Missing credentials पर clear setup state हो।
+- Connected, configured और tested status अलग हों।
+- Social, payment, email और AI integration को केवल placeholder screen बनाकर complete न कहो।
+- Account credentials या production access उपलब्ध न हो तो बाकी authorized work पूरा करके exact dependency बताओ।
+
+## 18. WhatsApp और floating controls
+
+- Floating WhatsApp button compact हो।
+- Mobile bottom controls से थोड़ा ऊपर सुरक्षित position पर रहे।
+- हल्की transparency हो, लेकिन icon readable रहे।
+- Content और important buttons cover न हों।
+- Admin से number, visibility और default message बदले जा सकें।
+- Default message में website से inquiry आने का context हो।
+- Community link और individual chat link अलग हों।
+- इनके clicks analytics में track हों जहाँ requested हो।
+
+## 19. Testing और completion criteria
+
+केवल build pass होने को पूरा project complete मत मानो।
+
+Verify करो:
+
+- Desktop, tablet, mobile और foldable layouts।
+- Full-page scroll और reverse scroll।
+- Mobile pinned hero और reduced motion।
+- Face visibility और no text overlap।
+- Dropdown positioning और consistent fields।
+- Navigation, buttons, tabs, modals और links।
+- Form → database → admin → relevant email flow।
+- Upload → crop → save → refresh।
+- CMS edit → public page update।
+- Login और role permissions।
+- Welcome email, composed email, campaign और resend behavior।
+- Redeploy के बाद data/password persistence।
+- Commerce हो तो order/payment/reward/refund lifecycle।
+- Relevant automated checks और production build।
+
+Completion report में दो:
+
+1. क्या implement हुआ।
+2. क्या वास्तव में test हुआ।
+3. कौन-से checks pass/fail हुए।
+4. क्या external configuration बाकी है।
+5. Verified preview/live link।
+6. छोटी requirement checklist।
+
+बिना जाँच “सब complete”, “100 score”, “payment live” या “email delivered” मत लिखो।
+
+## 20. काम करने और delivery का तरीका
+
+- Authorized scope का काम पूरा करो; केवल plan देकर न रुकना।
+- बार-बार छोटी confirmation न माँगो।
+- बड़े blockers जल्दी बताओ और independent काम जारी रखो।
+- Possible हो तो visual preview दिखाते चलो।
+- Existing features को नई changes से खराब न होने दो।
+- Local preview, repository push, cloud execution और production deployment को अलग status मानो।
+- Cloud execution requested हो तो उसके actual setup/status की जाँच करो।
+- Laptop बंद करने के बाद local process चलता रहेगा—ऐसा assume मत करो।
+- Deployment नए project की authorization के अनुसार करो; पुराने project की permission दूसरे project पर लागू मत मानो।
+- पहले से स्पष्ट deployment authorization हो तो अनावश्यक दोबारा confirmation न माँगो।
+- Shared preview link खोलकर confirm करो कि वह सही project का है।
+
+## 21. पुराने brands से क्या सीखना है
+
+Nisha Pandey से reusable preferences:
+
+- Premium editorial personal-brand presentation।
+- Blue/white theme, navy text और restrained gold accents।
+- Natural portrait fade, clear face और readable text।
+- Personal welcome-letter style emails।
+- Actual blog previews और signature।
+- Smooth same-screen mobile hero transitions।
+- Unified Leads, useful admin और persistent data।
+
+Nisha-specific content, जैसे “Simple Girl with big dream”, केवल उसी brand या स्पष्ट नए निर्देश पर इस्तेमाल करो।
+
+MyDose से reusable preferences:
+
+- साफ product presentation और concise hero copy।
+- Detailed product pages।
+- Synchronized ingredient image/text storytelling।
+- Centralized product data।
+- Operational inventory, rewards और role-based admin।
+- Product emails में वास्तविक imagery, relevant information और direct product links।
+
+पुराने brand के नाम, prices, photos, contacts, product claims और रंग नए project में अपने आप copy मत करो।
+
+## अब तुम्हारा output
+
+मेरे नए project brief को पढ़कर यह तैयार करो:
+
+A. Project की concise understanding और आवश्यक assumptions।
+
+B. Applicable modules और page/section map।
+
+C. एक complete MASTER BUILD PROMPT जिसमें ऊपर की relevant requirements project-specific भाषा में समाहित हों। सिर्फ “ऊपर की guidelines follow करो” लिखकर मत छोड़ना।
+
+D. Implementation order और dependencies।
+
+E. Verifiable acceptance checklist।
+
+F. केवल genuinely missing inputs की छोटी सूची।
+
+Final build prompt ऐसा हो जिसे developer या coding agent अलग बातचीत में पढ़कर काम शुरू कर सके। उसमें इस बातचीत पर निर्भर अस्पष्ट references न हों।
+
+### नए प्रोजेक्ट की जानकारी
+
+- Project/brand name:
+- Business और main objective:
+- Target audience:
+- Website/app type:
+- Required languages:
+- Required pages/features:
+- Preferred theme/reference:
+- Available logo/photos/content:
+- Existing project/repository:
+- Domain/hosting:
+- Required integrations:
+- Commerce/CRM/employee modules:
+- Local या cloud execution preference:
+- Deployment authorization:
+- क्या बिल्कुल नहीं बदलना:
+- Budget/timeline या अन्य constraints:

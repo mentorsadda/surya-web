@@ -1,0 +1,100 @@
+{
+  "date": "2026-09-29",
+  "provider": "Higgsfield",
+  "project": {
+    "project_id": "cec7e82f-4b87-4562-8d8c-8d89fc547c7c",
+    "default_folder_id": "cec7e82f-4b87-4562-8d8c-8d89fc547c7c",
+    "workspace_id": "cf8e55bd-fc19-4fbb-b81f-0af8e0f710ec",
+    "name": "Surya website hero workout"
+  },
+  "source": "assets/references/2026-09-29/hero-blue-edited.png",
+  "media_id": "99d23bb4-0a7a-43e9-ab23-ec37a237b208",
+  "attempts": [
+    {
+      "job_id": "3a8450b1-5b2e-4d94-8a3e-d657e384eed9",
+      "status": "failed",
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "duration": 6,
+        "resolution": "1080p",
+        "aspect_ratio": "auto",
+        "generate_audio": false,
+        "count": 1,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "99d23bb4-0a7a-43e9-ab23-ec37a237b208"
+          },
+          {
+            "role": "end_image",
+            "value": "99d23bb4-0a7a-43e9-ab23-ec37a237b208"
+          }
+        ],
+        "prompt": "Create a photorealistic seamless fitness website background loop from this exact image. Preserve this adult female trainer's facial identity, natural proportions, hairstyle, patterned athletic outfit, headphones, wristwatch and phone exactly. Locked-off camera, no zoom, no cuts. Keep her on the right with the left 45 percent empty slate-blue gym background for website text. She performs ONE smooth controlled standing upper-body warm-up repetition: gently rotate her shoulders and torso a few degrees toward camera while slightly extending then bending her left elbow, then slowly return to the precise initial flexed-arm pose. Keep the right hand securely holding the same phone throughout; do not add equipment. Feet and hips remain planted, head movement minimal, natural breathing, focused calm expression. Motion is continuous, anatomically natural, restrained and visibly exercise-like, not dancing or posing for fashion. Begin and finish in the identical pose and composition with near-zero motion at the seam for an endless loop. Preserve soft icy blue lighting and background. No text, logos, transitions, camera movement, extra people, face morphing or body distortion.",
+        "folder_id": "cec7e82f-4b87-4562-8d8c-8d89fc547c7c"
+      }
+    },
+    {
+      "job_id": "36cb696e-21ab-44fe-ad0a-c3352a7d016e",
+      "status": "completed",
+      "params": {
+        "model": "kling3_0",
+        "mode": "pro",
+        "sound": "off",
+        "duration": 6,
+        "aspect_ratio": "16:9",
+        "prompt": "Create a photorealistic seamless fitness website background loop from this exact image. Preserve this adult female trainer's facial identity, natural proportions, hairstyle, patterned athletic outfit, headphones, wristwatch and phone exactly. Locked-off camera, no zoom, no cuts. Keep her on the right with the left 45 percent empty slate-blue gym background for website text. She performs ONE smooth controlled standing upper-body warm-up repetition: gently rotate her shoulders and torso a few degrees toward camera while slightly extending then bending her left elbow, then slowly return to the precise initial flexed-arm pose. Keep the right hand securely holding the same phone throughout; do not add equipment. Feet and hips remain planted, head movement minimal, natural breathing, focused calm expression. Motion is continuous, anatomically natural, restrained and visibly exercise-like, not dancing or posing for fashion. Begin and finish in the identical pose and composition with near-zero motion at the seam for an endless loop. Preserve soft icy blue lighting and background. No text, logos, transitions, camera movement, extra people, face morphing or body distortion.",
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "99d23bb4-0a7a-43e9-ab23-ec37a237b208"
+          },
+          {
+            "role": "end_image",
+            "value": "99d23bb4-0a7a-43e9-ab23-ec37a237b208"
+          }
+        ],
+        "folder_id": "cec7e82f-4b87-4562-8d8c-8d89fc547c7c"
+      }
+    },
+    {
+      "job_id": "6dd4d8ae-c13d-41df-b4c2-3be8f676bf76",
+      "status": "completed",
+      "revision_request": "Recreate with body and face movement too.",
+      "params": {
+        "model": "kling3_0",
+        "mode": "pro",
+        "sound": "off",
+        "duration": 8,
+        "aspect_ratio": "16:9",
+        "prompt": "Animate the exact adult female trainer in the supplied photograph as an 8-second seamless premium fitness website hero loop. Preserve her exact facial identity, bone structure, eyes, nose, skin tone, natural body proportions, hairstyle, patterned sportswear, headphones and watch. Fixed camera, no zoom or cuts, soft slate-blue gym background unchanged; trainer stays on the right with left side clear for website text. Make the BODY AND FACE visibly and naturally move, not just one arm: she does one slow standing dynamic warm-up with a gentle weight shift and controlled upper-body torso rotation toward camera, both shoulders moving naturally, and her free left arm extending then curling back to its initial bent position. Her right hand continues securely holding the same phone throughout. While rotating, she naturally lifts her chin and turns her head a little toward camera, briefly makes eye contact, blinks naturally and gives a small relaxed closed-mouth confident smile. Then she turns her head and shoulders back, relaxes her expression and returns to the exact starting pose. Her hips shift subtly for balance, with natural breathing and gentle hair movement, no walking or dancing. Complete this smooth single repetition within 8 seconds, with the FIRST and LAST frame matching closely for an endless seamless loop. Moderate restrained motion suitable behind website copy, clearly noticeable torso and head movement. Realistic anatomy and hand joints, consistent identity throughout. No talking, exaggerated grin, rubbery face, body morphing, extra fingers, equipment changes, camera movement, text, or additional people.",
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "99d23bb4-0a7a-43e9-ab23-ec37a237b208"
+          },
+          {
+            "role": "end_image",
+            "value": "99d23bb4-0a7a-43e9-ab23-ec37a237b208"
+          }
+        ],
+        "folder_id": "cec7e82f-4b87-4562-8d8c-8d89fc547c7c"
+      }
+    }
+  ],
+  "provenance": "AI animation of supplied Surya portrait; brand illustration, not real recorded workout footage or client outcome evidence.",
+  "previous_output": {
+    "file": "public/videos/surya-workout-loop.mp4",
+    "duration_seconds": 6,
+    "bytes": 515586,
+    "encoding": "H.264 yuv420p, no audio, faststart, CRF23",
+    "master": "assets/references/2026-09-29/surya-workout-higgsfield-original.mp4"
+  },
+  "output": {
+    "file": "public/videos/surya-workout-body-face-loop.mp4",
+    "duration_seconds": 8,
+    "bytes": 672908,
+    "master": "assets/references/2026-09-29/surya-workout-body-face-original.mp4"
+  }
+}

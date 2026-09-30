@@ -1,0 +1,1221 @@
+Build a complete, premium, responsive fitness-coaching website and practical coaching management system for SURYA SINGH.
+
+This is an implementation request. Deliver a working website, database-backed admin, lead and booking workflows, branded emails, and a secure client area. Do not stop at a visual mockup or a collection of nonfunctional sections.
+
+1. Brand, positioning and factual foundation
+
+Working brand name:
+TRAIN WITH SURYA
+
+Primary identity:
+Surya Singh — Personal Trainer & Fitness Coach
+
+Proposed tagline:
+Stronger every day. With Surya.
+
+Core positioning:
+Personal coaching that combines strength training, sustainable weight management, practical nutrition guidance and consistent support.
+
+The website should make visitors feel:
+“She understands what starting feels like, and she can help me build a routine I can actually follow.”
+
+User-provided background:
+
+Surya is a female personal trainer.
+
+She has worked at the fitness company the user called “Cut Fit” for approximately two years. Confirm the correct employer name and employment dates; available Instagram material references cult.fit.
+
+The user reports that she ranks among the top five trainers in Delhi NCR every month. Confirm the ranking organisation, category, metric and applicable months before publishing this as an established claim.
+
+She experienced a personal fitness transformation from a higher body weight in her twenties to her current fitter, stronger self.
+
+Her user-reported height is 5 feet 9 inches. This is optional biography information, not a qualification or headline selling point.
+
+She has multiple client transformation stories and happy clients. Exact numbers and outcomes have not been supplied.
+
+Available sources:
+
+Instagram:
+https://www.instagram.com/surya.singhhhh/
+
+Facebook:
+https://www.facebook.com/surya.singh.928762
+
+Instagram CULT highlight:
+https://www.instagram.com/stories/highlights/17909423526115042/
+
+Research observation:
+A certificate image in that highlight names Surya Singh as a “CULT CERTIFIED PERSONAL TRAINER”, with an issue date of 17 February 2025. This is a social-profile observation, not independent verification with the issuer.
+
+Content rules:
+
+Distinguish user-supplied biography, observed material and independently verified claims.
+
+Preserve the personal transformation story without using insulting language such as “fatty”.
+
+Do not invent starting weight, weight lost, transformation duration, age, client count, qualifications, awards or testimonials.
+
+Do not imply that this independent coaching website is an official cult.fit website.
+
+Employer logos, ranking badges and certificates must have accurate context.
+
+Do not present Surya as a doctor or registered dietitian without verified qualifications.
+
+Use supportive, confident language without body shaming or guaranteed weight-loss promises.
+
+2. Business goals and audience
+
+Primary goals:
+
+Introduce Surya and build trust.
+
+Explain her training programmes clearly.
+
+Help visitors choose an appropriate coaching format.
+
+Generate qualified consultation enquiries.
+
+Convert suitable enquiries into clients.
+
+Give active clients an organised place for workouts, nutrition plans, appointments and progress.
+
+Let Surya manage all content and coaching operations without editing code.
+
+Primary audience:
+
+Beginners who feel unsure about starting.
+
+Women looking for an approachable personal trainer.
+
+Busy professionals.
+
+People seeking sustainable weight management.
+
+People who prefer home workouts.
+
+Clients seeking personalised online coaching.
+
+Delhi NCR clients interested in in-person sessions, subject to confirmed service locations.
+
+Do not describe all programmes as women-only unless Surya confirms that policy.
+
+3. Visual direction
+
+Create a premium fitness editorial identity that feels athletic, personal and welcoming.
+
+Proposed palette:
+
+Warm ivory: #F6F3ED
+
+Deep charcoal: #18201D
+
+Forest green: #244A3C
+
+Muted sage: #DCE6DB
+
+Restrained warm orange for selected CTAs: #C8542D
+
+Validate text contrast and adjust shades where needed.
+
+Use:
+
+Large editorial headings.
+
+Readable body text.
+
+Generous spacing.
+
+Real training photography.
+
+Natural portrait blending.
+
+Strong but restrained buttons.
+
+Subtle glass navigation.
+
+Alternating light content sections and darker photographic moments.
+
+Avoid:
+
+Generic gym templates.
+
+Excessive black backgrounds.
+
+Neon bodybuilding aesthetics.
+
+Pink styling simply because the trainer is a woman.
+
+Repetitive grids of identical cards.
+
+Tiny text, unnecessary icons and excessive decoration.
+
+Keep website, client dashboard, admin and emails visually consistent.
+
+4. Assets and image handling
+
+Inspect relevant content from the supplied profiles when access is available.
+
+Prioritise:
+
+Clear professional portraits.
+
+Training and coaching photos.
+
+Exercise demonstration videos.
+
+Approved personal journey photos.
+
+Genuine client transformation material.
+
+Relevant certificates and recognition.
+
+Do not treat every lifestyle photograph as a professional fitness asset.
+
+Create an asset register containing:
+source URL, proposed placement, description, crop requirements, available resolution and publication approval status.
+
+Use only material approved for website reuse. Client photos and results require separate publication consent. Private client information must not enter public sections.
+
+Do not alter Surya’s face or body shape. Do not generate fake before-and-after images.
+
+Where original high-resolution images are unavailable, identify the gap and allow admin upload. Do not depend on expiring social-media image URLs for core website images.
+
+Every image editor must support:
+
+Upload.
+
+Crop and focal point.
+
+Desktop/mobile preview.
+
+Recommended dimensions and aspect ratio.
+
+Compression without visibly poor quality.
+
+Alt text.
+
+Replace/remove.
+
+Progress and useful error messages.
+
+Persistence after Save, refresh and redeployment.
+
+Keep faces visible and text away from faces. Fade edges towards content, not across facial features.
+
+5. Site architecture
+
+Build these public pages:
+
+Home
+
+Meet Surya
+
+Coaching Programmes
+
+Individual Programme Detail
+
+Client Transformations
+
+Individual Transformation Story
+
+Book a Consultation
+
+Fitness Journal
+
+Individual Article
+
+Contact
+
+Relevant Privacy, Terms and Booking/Cancellation pages
+
+Build these authenticated areas:
+
+Client Dashboard
+
+Coach/Admin Dashboard
+
+Keep the main navigation concise:
+
+Meet Surya
+Programmes
+Transformations
+Journal
+
+Primary CTA:
+Book a Consultation
+
+Secondary navigation:
+Client Login
+
+Admin access should not clutter the public navigation.
+
+6. Cinematic home-page hero
+
+Use a three-scene scroll-controlled hero with Surya as the central visual.
+
+Scene 1 — Personal connection
+
+Headline:
+Your stronger chapter starts here.
+
+Supporting copy:
+Personal training, practical nutrition guidance and a plan built around your life—with Surya Singh.
+
+Primary CTA:
+Find My Programme
+
+Secondary CTA:
+Meet Surya
+
+Visual:
+Clear professional portrait or suitable training image.
+
+Scene 2 — Personal journey
+
+Headline:
+A personal journey. A more personal approach.
+
+Supporting copy:
+Surya’s own fitness journey shapes the way she supports others—with patience, consistency and an understanding of what starting can feel like.
+
+CTA:
+Explore Her Journey
+
+Visual:
+Approved journey or training imagery. Do not fabricate a “before” photograph.
+
+Scene 3 — Coaching formats
+
+Headline:
+At home. Online. One-to-one.
+
+Supporting copy:
+Find a coaching format that fits your goals, your schedule and the way you like to train.
+
+CTA:
+Explore Coaching
+
+Animation contract:
+
+Keep the hero pinned in one viewport while scenes crossfade.
+
+Desktop and mobile must preserve the same storytelling concept.
+
+Mobile scenes must not accidentally become three separate full-height sections.
+
+Scroll forward and backward correctly.
+
+Synchronise images, text, CTAs and scene indicators.
+
+Keep text readable throughout transitions.
+
+Use restrained masking, fade and depth.
+
+No face clipping, blank scroll gaps or aggressive scroll hijacking.
+
+Use lightweight mobile treatment.
+
+Provide an accessible reduced-motion version.
+
+Content must remain visible if animation fails.
+
+Sticky navigation must meet the hero without an unwanted gap.
+
+7. Meet Surya and her transformation story
+
+Home-page section heading:
+Before I coached others, I learned to show up for myself.
+
+Present a concise third-person introduction until Surya approves any first-person autobiographical wording.
+
+Explain:
+
+Her personal experience of changing her fitness habits.
+
+How that experience informs her coaching.
+
+Her approach to consistency and strength.
+
+Her professional training background.
+
+The kinds of clients she helps.
+
+Use an editorial image/text layout, not a long biography inside a small card.
+
+CTA:
+Read Surya’s Story
+
+The full story page should support an editable timeline:
+
+Starting point.
+
+Building consistent habits.
+
+Learning and trainer development.
+
+Beginning professional coaching.
+
+Helping clients.
+
+Current coaching philosophy.
+
+Only publish actual dates and milestones supplied or verified.
+
+Provide a credentials area with editable certificate, issuer, date and description.
+
+For the reported top-five recognition, provide an unpublished CMS record with:
+ranking body, category, geography, month/year, supporting evidence and approved wording.
+
+Do not show an unsupported permanent “Top 5 Trainer in Delhi NCR” badge.
+
+8. Coaching programmes
+
+Section heading:
+Choose support that fits your life.
+
+Provide filters:
+One-to-One / Online / At Home / Nutrition / Weight Management
+
+Create editable programme entries for:
+
+A. One-to-One Personal Training
+
+Focus:
+Individual attention, exercise technique, structured progression and accountability.
+
+Display:
+
+Suitable client goals.
+
+Confirmed training location or delivery mode.
+
+Assessment process.
+
+Session duration.
+
+Number of sessions.
+
+What support is included.
+
+Availability.
+
+Price or “Enquire for details”.
+
+CTA:
+Enquire About Personal Training
+
+Do not imply access to a particular gym or employer facility without confirmation.
+
+B. Online Personal Coaching
+
+Include configurable:
+
+Initial consultation.
+
+Personalised workout schedule.
+
+Exercise demonstrations.
+
+Progress reviews.
+
+Check-ins.
+
+Approved communication channel.
+
+Clear response expectations.
+
+Optional live sessions if actually offered.
+
+CTA:
+Explore Online Coaching
+
+C. Home-Based Workout Programme
+
+Support:
+
+Beginner-friendly onboarding.
+
+Available equipment selection.
+
+Bodyweight and equipment-based options.
+
+Workouts organised by available time.
+
+Exercise alternatives.
+
+Progression reviewed by the coach.
+
+Demonstration videos.
+
+CTA:
+Build My Home Routine
+
+Do not automatically advertise fixed workout durations or session frequency until configured.
+
+D. Sustainable Weight-Management Coaching
+
+Position around:
+
+Consistent movement.
+
+Strength training.
+
+Practical eating habits.
+
+Accountability.
+
+Progress beyond the weighing scale.
+
+CTA:
+Discuss My Goals
+
+Avoid crash-diet positioning, guaranteed kilograms lost or fixed transformation deadlines.
+
+E. Nutrition and Diet-Chart Support
+
+Present as personalised nutrition support within Surya’s verified professional scope.
+
+Support:
+
+Food preferences.
+
+Vegetarian/non-vegetarian preferences.
+
+Allergies and restrictions.
+
+Daily schedule.
+
+Home-food preferences.
+
+Meal options and substitutions.
+
+Coach-reviewed adjustments.
+
+CTA:
+Discuss Nutrition Support
+
+Do not publish one universal diet chart as suitable for every visitor. Do not auto-prescribe medical diets.
+
+Each programme needs a real detail page with:
+overview, suitability, inclusions, exclusions, delivery mode, actual duration, frequency, support boundaries, pricing, FAQs and enquiry/booking.
+
+Pricing and programme facts must come from one database source. Unknown prices should show “Enquire”, not invented amounts or ₹0.
+
+9. Programme finder
+
+Create a short, optional “Find Your Starting Point” flow.
+
+Ask:
+
+Main goal.
+
+Preferred training location.
+
+Current experience.
+
+Available time.
+
+Available equipment.
+
+Preferred coaching format.
+
+Show one or two relevant programme suggestions with a plain-language reason.
+
+Keep suggestions rule-based and editable by admin.
+
+This is a programme-matching tool, not a medical assessment.
+
+Visitors should be able to see their suggested starting point without being forced to share sensitive information. Offer an optional consultation request afterwards.
+
+Pass selected programme and source into the enquiry form.
+
+10. Coaching method
+
+Heading:
+A clear plan. Consistent support. Progress you can follow.
+
+Use four steps:
+
+Understand your starting point.
+
+Build your personal plan.
+
+Train with guidance.
+
+Review and adjust.
+
+Explain what the client actually does and receives at each step.
+
+Use an elegant connected sequence on desktop and readable vertical layout on mobile. Reveal steps on scroll without hiding content permanently.
+
+CTA:
+Book Your First Conversation
+
+Do not label the consultation “free” unless confirmed.
+
+11. Client transformations and testimonials
+
+Heading:
+Different journeys. Meaningful progress.
+
+Support verified stories covering:
+
+Strength improvements.
+
+Consistency.
+
+Fitness confidence.
+
+Weight-management outcomes where documented.
+
+Home-workout progress.
+
+Training habits.
+
+Each story can include:
+
+Approved client name or anonymised identity.
+
+Goal.
+
+Programme.
+
+Actual dates or duration.
+
+Client-approved photos.
+
+Documented outcomes.
+
+Client quote.
+
+Surya’s coaching approach.
+
+Before/after sliders should be accessible and clearly labelled. Do not imply two images are a transformation pair without confirmation.
+
+Include an honest note that individual results vary.
+
+Show approximately three readable story cards on desktop, fewer on smaller screens. Open a full story page on click.
+
+Maintain publication consent separately from private coaching records. Provide hide/unpublish controls.
+
+When no approved stories are available, hide the public results grid rather than publishing fake success stories.
+
+12. Training library and social content
+
+Create a “Train With Me” preview area with curated exercise demonstrations.
+
+Each item should support:
+
+Exercise name.
+
+Equipment.
+
+Coach-written technique cues.
+
+Video/poster.
+
+Applicable programme tags.
+
+Accessible captions where available.
+
+Keep private programme assignments inside the client area.
+
+Create a separate “Beyond the workout” social section using selected exact posts/reels from Surya’s profiles.
+
+Do not insert random Instagram videos.
+
+Use suitable official embeds or approved hosted media.
+
+Provide a separate “Watch on Instagram” action.
+
+Lazy-load heavy embeds.
+
+Supply a clear fallback when embedding fails.
+
+Keep professional relevance and image quality ahead of follower counts.
+
+13. Consultation and booking
+
+Build an operational consultation flow.
+
+Initial enquiry fields:
+
+Name.
+
+Email.
+
+Phone/WhatsApp.
+
+City.
+
+Interested programme.
+
+Preferred online/in-person format.
+
+Preferred contact time.
+
+Short message.
+
+Separate contact and marketing preferences.
+
+Collect detailed health or injury information later through secure onboarding, only when needed.
+
+Booking must support:
+
+Admin-managed availability.
+
+Asia/Kolkata default timezone and clear visitor timezone display.
+
+Configurable appointment duration.
+
+Buffers and unavailable dates.
+
+Conflict prevention.
+
+Pending/confirmed/cancelled/completed states.
+
+Rescheduling and cancellation rules.
+
+Calendar confirmation.
+
+Reminder settings.
+
+Duplicate-submission protection.
+
+If automatic scheduling is not configured, clearly offer “Request a consultation time” rather than pretending a slot is confirmed.
+
+14. Secure client dashboard
+
+Create a practical dashboard for enrolled clients.
+
+Sections:
+
+My Programme
+
+My Workout Plan
+
+My Nutrition Plan
+
+My Appointments
+
+My Check-ins
+
+My Progress
+
+Messages/Coach Notes
+
+Billing, when payments are enabled
+
+Profile and Preferences
+
+Workout plan:
+
+Date/week.
+
+Exercises.
+
+Coach-entered sets, repetitions, rest or duration.
+
+Demonstration.
+
+Alternatives.
+
+Completion status.
+
+Client notes.
+
+Nutrition plan:
+
+Coach-approved plan.
+
+Meal options and substitutions.
+
+Relevant preferences.
+
+Notes.
+
+Version/date.
+
+Downloadable version where appropriate.
+
+Progress:
+
+Optional weight/measurements.
+
+Exercise progress.
+
+Workout consistency.
+
+Client-selected goals.
+
+Optional private photos.
+
+Clear charts based on actual records.
+
+No public leaderboard comparing bodies or weight loss.
+
+Clients can access only their own records. Private progress photos and health-related notes must not be publicly accessible or exposed through analytics.
+
+15. Coach/admin dashboard and CRM
+
+Create a complete admin with:
+
+Overview
+
+Website CMS
+
+Programmes
+
+Clients
+
+Leads
+
+Consultations and Calendar
+
+Workout Plans
+
+Nutrition Plans
+
+Check-ins
+
+Transformations and Consents
+
+Testimonials
+
+Blog
+
+Email Centre
+
+Media Library
+
+Analytics
+
+Settings
+
+Users and Permissions
+
+Audit Logs
+
+Core operations:
+
+Unified leads from enquiries, programme finder, newsletter, popup, booking and manual imports.
+
+Source/UTM tracking.
+
+Manual add.
+
+CSV import/export with validation and deduplication.
+
+Search, filter, tags, notes and follow-up dates.
+
+Convert a lead into a client without losing history.
+
+Assign programmes and plans.
+
+Reuse plan templates, then customise per client.
+
+Publish plan revisions while retaining history.
+
+Track consultation statuses and actual coaching activity.
+
+Dashboard metrics must come from real data. Never seed impressive client counts into production.
+
+All public content must be editable:
+headings, copy, images, CTA labels/links, programmes, FAQs, social links, recognition, contact information, SEO and section visibility/order.
+
+Use readable fonts, strong contrast and consistent inputs. Dropdowns must open next to their fields.
+
+16. Branded welcome letters and notifications
+
+Create separate templates for:
+
+Newsletter welcome.
+
+Enquiry thank-you.
+
+Consultation confirmation.
+
+Consultation reminder or reschedule.
+
+Programme enrolment welcome.
+
+Workout/nutrition plan available.
+
+Check-in reminder.
+
+New article notification.
+
+Manually composed coach email.
+
+Suggested subject directions:
+
+Welcome to your stronger chapter.
+
+Let’s find the right starting point for you.
+
+Your consultation with Surya is confirmed.
+
+Your coaching plan is ready.
+
+Every applicable template includes:
+
+Brand logo/wordmark.
+
+Appropriate Surya portrait.
+
+Personalised greeting with fallback.
+
+Concise useful message.
+
+Clear next action.
+
+Branded signature.
+
+Relevant support/contact link.
+
+Marketing/welcome templates can include actual published blog cards near the footer. Keep transactional reminders focused.
+
+Signature:
+
+Warmly,
+Surya Singh
+Personal Trainer & Fitness Coach
+Train With Surya
+
+Use the website palette, clear typography, naturally blended imagery and adequate whitespace.
+
+Implement email-compatible layouts with mobile and major email-client fallbacks. Do not rely solely on unsupported fonts or CSS masking.
+
+The same branded shell must apply to Admin → Compose emails.
+
+Operational controls:
+
+Template preview.
+
+Editable subject/preheader.
+
+Test sending.
+
+Recipient selection.
+
+Queue/sent/failed/skipped statuses.
+
+Retries.
+
+Duplicate protection.
+
+Explicit logged resend.
+
+Unsubscribe/suppression enforcement for marketing.
+
+Correct distinction between provider acceptance and confirmed delivery.
+
+Do not include private health details in email subjects or marketing emails. Link clients to their secure dashboard.
+
+17. Fitness journal and lead resources
+
+Build an English/Hindi-ready blog with a visible language toggle when both versions exist.
+
+Initial proposed draft topics:
+
+Starting Strength Training When You Feel Unsure.
+
+Building a Home Workout Routine You Can Maintain.
+
+Progress Beyond the Weighing Scale.
+
+Practical Meal Planning Around a Busy Schedule.
+
+What to Expect from Personal Coaching with Surya.
+
+These are draft topics, not claims that Surya has already authored them.
+
+Each article includes:
+relevant image, title, excerpt, author, real date, read time, categories, language, related articles and suitable coaching CTA.
+
+Provide draft/preview/schedule/publish controls and independent SEO fields.
+
+An optional lead resource can be:
+“My Weekly Movement Planner”.
+
+Use it as a planning worksheet, not a universal diet prescription. Make popup timing configurable, dismissible and non-repetitive.
+
+18. Payments and enrolment
+
+Prepare a secure payment module for paid programmes or consultations.
+
+Activate public checkout only when prices, policies and provider credentials are configured.
+
+Support:
+
+Programme/consultation association.
+
+Test/live separation.
+
+Server-side verification.
+
+Webhook signature verification.
+
+Idempotent payment updates.
+
+Failed and cancelled payments.
+
+Receipts.
+
+Refund tracking.
+
+Clear programme access rules.
+
+Do not auto-enrol a client based only on a browser success screen.
+
+Do not assume recurring billing, free sessions, refund terms or prices.
+
+19. Privacy, safety and AI assistance
+
+Use separate consent for:
+
+Service communication.
+
+Marketing.
+
+Public testimonials.
+
+Public transformation photos.
+
+Provide appropriate access, correction and deletion workflows. Protect sensitive client records and exclude their contents from tracking tools.
+
+Coaching onboarding should identify when a plan needs qualified professional review without making diagnoses.
+
+AI features may help Surya draft:
+
+Articles.
+
+Programme descriptions.
+
+Email copy.
+
+Exercise explanations.
+
+Check-in summaries.
+
+AI must not automatically publish personalised workouts or diet plans. Surya reviews and approves client assignments. Do not send identifiable health records to an external AI service by default.
+
+Use secure authentication, server-side authorisation, protected file access, input validation, rate limits, safe secret storage and audit logs.
+
+20. Performance, SEO and floating controls
+
+Implement:
+
+Semantic pages and headings.
+
+Unique metadata.
+
+Canonicals.
+
+Sitemap and robots configuration.
+
+Social preview images.
+
+Accurate structured data.
+
+Natural relevant keywords.
+
+Responsive image sizes.
+
+Lazy-loaded videos.
+
+Font optimisation.
+
+Animation cleanup.
+
+Minimal layout shift.
+
+Use Delhi NCR location keywords only for confirmed service areas. Do not invent addresses or service centres.
+
+Do not promise guaranteed rankings or Lighthouse 100. Report measured results.
+
+Floating WhatsApp button:
+
+Compact.
+
+Slightly translucent but readable.
+
+Above mobile bottom controls.
+
+Never covering main content or CTAs.
+
+Admin-editable number and message.
+
+Default message:
+“Hi Surya, I came through your website and would like to know more about your coaching programmes.”
+
+Do not invent a WhatsApp number.
+
+Footer:
+
+Brand.
+
+Short positioning.
+
+Navigation.
+
+Social links.
+
+Contact.
+
+Policies.
+
+Newsletter where appropriate.
+
+“Powered by Connect Adda” linked to https://connectadda.com.
+
+21. Architecture and persistence
+
+Inspect and retain an existing suitable stack.
+
+For a fresh project, choose a maintainable architecture supporting:
+responsive frontend, server APIs, secure authentication, relational database, durable media storage, email delivery and background jobs.
+
+Store business content in the database, not hard-coded components.
+
+Persist:
+
+Accounts and changed passwords.
+
+Leads and subscribers.
+
+Clients.
+
+Programmes and prices.
+
+Bookings.
+
+Plans and plan versions.
+
+Progress records.
+
+Consent.
+
+Uploaded media.
+
+Email history.
+
+Content and SEO settings.
+
+Redeployment must not erase data or restore default passwords.
+
+Use safe migrations, backups and restore guidance. Demo content must remain separate from production.
+
+22. Implementation sequence
+
+Inspect the project and organise verified content/assets.
+
+Establish design system, data model, authentication and storage.
+
+Build responsive public pages and precise scroll behavior.
+
+Connect complete CMS and media editing.
+
+Implement leads, consultation booking and email flows.
+
+Implement client plans, check-ins and progress dashboard.
+
+Integrate configured payments.
+
+Complete SEO, accessibility, performance and security checks.
+
+Verify end-to-end and prepare deployment.
+
+Missing credentials or unverified ranking evidence should not stop unrelated work. Leave clear setup states and unpublished records.
+
+This prompt does not itself authorise production deployment or sending real campaigns. Follow the current project owner’s explicit deployment/sending instructions.
+
+23. Acceptance checklist
+
+Before calling the project complete, verify:
+
+Desktop, tablet, iPhone, Android and foldable layouts.
+
+No horizontal overflow or unintended blank areas.
+
+Face visibility in every responsive crop.
+
+Same-screen hero transitions on mobile.
+
+Forward/reverse scroll and reduced motion.
+
+Every programme opens the correct detail page.
+
+Programme finder gives explainable suggestions.
+
+Forms create the correct database and CRM records.
+
+Duplicate submission handling.
+
+Booking conflicts and timezone behavior.
+
+Upload → crop → save → refresh.
+
+CMS change → correct public update.
+
+Correct role dashboards and client-data isolation.
+
+Workout/nutrition assignment → client visibility.
+
+Progress data persists.
+
+Branded welcome and manually composed emails.
+
+Send/retry/resend and unsubscribe behavior.
+
+Payment verification and access rules when configured.
+
+Data/password/media survival across redeployment.
+
+Working social links and exact reel content.
+
+Relevant automated tests, type checks and production build.
+
+Real browser visual review.
+
+Final delivery must include:
+
+Implemented features.
+
+Verified features.
+
+Remaining dependencies.
+
+Actual test results.
+
+Verified preview/live URL.
+
+Brief admin usage guide.
+
+Honest deployment status.
+
+24. Essential missing inputs
+
+Keep these configurable and request them together only when needed:
+
+Final brand name/logo and domain.
+
+Correct employer name and employment dates.
+
+Evidence/context for the top-five recognition.
+
+Approved professional photos and transformation stories.
+
+Programme duration, inclusions and pricing.
+
+In-person training locations.
+
+Consultation availability and cancellation rules.
+
+Business email and WhatsApp number.
+
+Hosting, email and payment configuration.
+
+Approved nutrition-service scope and qualifications.
+
+Begin with the available information and practical assumptions. Build the complete authorised experience rather than stopping after the homepage.
