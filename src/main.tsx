@@ -231,18 +231,20 @@ function Footer() {
     <footer className="surya-footer">
       <div className="footer-atmosphere" aria-hidden="true"><img className="footer-portrait" src="/images/surya/hero-selected.png" alt="" loading="lazy"/><div className="footer-equipment"><img src="/images/surya/footer-reference.png" alt="" loading="lazy"/></div><div className="footer-planner"><img src="/images/surya/footer-reference.png" alt="" loading="lazy"/></div></div>
       <div className="footer-top wrap">
-        <div className="footer-invitation">
+        <div className="footer-invitation reveal reveal-fade-right">
           <p className="eyebrow">A LITTLE ENCOURAGEMENT IN YOUR INBOX <span/></p>
           <h2>Your next chapter,<br/><em>one note at a time.</em></h2>
           <p>Get fitness tips, simple nutrition ideas, travel stories and real talk — straight to your inbox.</p>
         </div>
-        <Newsletter />
-        <div className="footer-benefits">
-          {[[Dumbbell,"Workout","tips & plans"],[Apple,"Nutrition","guidance"],[Heart,"Mindset","& motivation"],[ChartNoAxesColumnIncreasing,"Travel &","lifestyle stories"]].map(([Icon,first,last]:any)=><div key={first}><Icon size={30} strokeWidth={1.6}/><span>{first}<br/>{last}</span></div>)}
+        <div className="reveal delay-1">
+          <Newsletter />
         </div>
-        <div className="footer-script" aria-hidden="true">Stronger<br/><span>Every Day</span><Heart size={27}/></div>
+        <div className="footer-benefits reveal-stagger">
+          {[[Dumbbell,"Workout","tips & plans"],[Apple,"Nutrition","guidance"],[Heart,"Mindset","& motivation"],[ChartNoAxesColumnIncreasing,"Travel &","lifestyle stories"]].map(([Icon,first,last]:any)=><div key={first} className="reveal reveal-card"><Icon size={30} strokeWidth={1.6}/><span>{first}<br/>{last}</span></div>)}
+        </div>
+        <div className="footer-script reveal delay-2" aria-hidden="true">Stronger<br/><span>Every Day</span><Heart size={27}/></div>
       </div>
-      <div className="footer-main wrap">
+      <div className="footer-main wrap reveal">
         <div className="footer-brand-block">
           <Logo footer />
           <p>Personal coaching. Practical habits.<br/>A stronger everyday.</p>
@@ -272,7 +274,7 @@ function Footer() {
           {[[Dumbbell,"Train"],[Apple,"Eat well"],[Droplets,"Stay hydrated"],[Moon,"Rest"],[Heart,"Repeat"]].map(([Icon,label]:any)=><p key={label}><Icon size={23} strokeWidth={1.6}/>{label}</p>)}
         </div>
       </div>
-      <div className="footer-bottom wrap">
+      <div className="footer-bottom wrap reveal delay-1">
         <span>© {new Date().getFullYear()} Train with Surya</span>
         <div>{Object.entries(policies).map(([slug,p])=><Link key={slug} to={"/policies/"+slug}>{p.title.split(" policy")[0]}</Link>)}<button onClick={()=>setCookieOpen(true)}>Cookie preferences</button></div>
         <span className="footer-made">Made with <Heart size={17}/> for a stronger you.<a href="https://connectadda.com" target="_blank" rel="noreferrer">Powered by <b>Connect Adda ↗</b></a></span>
@@ -536,7 +538,7 @@ function ProgrammeCard({ p, index, referencePhoto = false }: any) {
   return (
     <Link
       to={"/programmes/" + p.id}
-      className={`programme-card ${p.color || "sage"} reveal`}
+      className={`programme-card ${p.color || "sage"} reveal reveal-card`}
     >
       <div className="card-top">
         <span>0{index + 1}</span>
@@ -578,12 +580,12 @@ function HomeSection({ section }: any) {
           sub={section.subtitle}
           eyebrow={section.eyebrow || "FIND YOUR WAY FORWARD"}
         />
-        <div className="programme-grid">
+        <div className="programme-grid reveal-stagger">
           {data.programmes.slice(0, 3).map((p: Entry, i: number) => (
             <ProgrammeCard key={p.id} p={p} index={i} referencePhoto={!p.image} />
           ))}
         </div>
-        <div className="programmes-bottom"><span className="programmes-motto">{section.motto || "STRONG BODY. CLEAR MIND. CONFIDENT YOU."}</span><div className="under-note">
+        <div className="programmes-bottom reveal delay-2"><span className="programmes-motto">{section.motto || "STRONG BODY. CLEAR MIND. CONFIDENT YOU."}</span><div className="under-note">
           Not sure where to start?{" "}
           <Link to="/finder">
             Let’s find your fit <ArrowRight size={18} />
@@ -609,36 +611,36 @@ function HomeSection({ section }: any) {
       <section className="about-section coach-reference-section" id="meet-your-coach">
         <div className="coach-section-watermark" aria-hidden="true">SURYA</div>
         <div className="wrap about-grid">
-          <div className="about-photo supplied-coach-photo reveal">
+          <div className="about-photo supplied-coach-photo reveal reveal-fade-right">
             <img loading="lazy" src={coachPhoto} alt="Surya Singh, fitness coach and personal trainer" />
           </div>
-          <div className="about-copy reveal">
+          <div className="about-copy reveal reveal-fade-left">
             <img className="coach-person-watermark" src={coachWatermark} alt="" aria-hidden="true" loading="lazy" />
             <p className="eyebrow">{eyebrow}</p>
             <h2>{section.title.split("\n")[0]}<br /><span>{section.title.split("\n").slice(1).join(" ")}</span></h2>
             <p>{coachText}</p>
-            <div className="coach-values">
-              <span><Dumbbell /><span>{val1.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
-              <span><Leaf /><span>{val2.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
-              <span><Heart /><span>{val3.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
+            <div className="coach-values reveal-stagger">
+              <span className="reveal reveal-card"><Dumbbell /><span>{val1.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
+              <span className="reveal reveal-card"><Leaf /><span>{val2.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
+              <span className="reveal reveal-card"><Heart /><span>{val3.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
             </div>
             <Button to={btnLink}>{btnText}</Button>
-            <div className="coach-note" aria-hidden="true">
+            <div className="coach-note reveal delay-2" aria-hidden="true">
               {noteText.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)} <Heart size={27} />
             </div>
           </div>
         </div>
-        <div className="wrap coach-section-bottom"><span>{bottom1}</span><span>{bottom2}</span></div>
+        <div className="wrap coach-section-bottom reveal delay-2"><span>{bottom1}</span><span>{bottom2}</span></div>
       </section>
     );
   }
   if (section.id === "method")
     return (
       <section className="section method approach-reference" id="surya-approach">
-        <div className="approach-portrait"><img src="/images/surya/approach-cutout.png" alt="Surya smiling in her original mirror selfie" loading="lazy" /></div>
+        <div className="approach-portrait reveal reveal-fade-right"><img src="/images/surya/approach-cutout.png" alt="Surya smiling in her original mirror selfie" loading="lazy" /></div>
         <div className="wrap approach-content">
         <SectionHeading heading={<>{section.title.split("\n")[0]}<br /><span>{section.title.split("\n").slice(1).join(" ")}</span></>} sub={section.subtitle} eyebrow="THE SURYA APPROACH" />
-        <div className="method-grid">
+        <div className="method-grid reveal-stagger">
           {[
             [
               "01",
@@ -661,7 +663,7 @@ function HomeSection({ section }: any) {
               "Check in, celebrate progress and adjust together.",
             ],
           ].map(([n, t, b]) => (
-            <div className="method-step reveal" key={n}>
+            <div className="method-step reveal reveal-card" key={n}>
               <span>
                 {n}
                 <ArrowRight size={20} />
@@ -672,7 +674,7 @@ function HomeSection({ section }: any) {
           ))}
         </div>
         </div>
-        <div className="wrap approach-footer">DISCIPLINE TODAY. A STRONGER TOMORROW.</div>
+        <div className="wrap approach-footer reveal delay-2">DISCIPLINE TODAY. A STRONGER TOMORROW.</div>
       </section>
     );
   if (section.id === "transformations")
@@ -680,13 +682,13 @@ function HomeSection({ section }: any) {
       <section className="progress-section progress-reference" id="progress">
         <div className="progress-orbit" aria-hidden="true" />
         <div className="progress-gym-watermarks" aria-hidden="true"><span className="progress-brand-mark">SURYA</span><div className="progress-rack"><i /><i /><i /></div><Dumbbell className="progress-weight-mark" /><span className="progress-wall-motto">DISCIPLINE<br />CREATES<br />FREEDOM</span><span className="progress-side-words">FITNESS<br />NUTRITION<br />MINDSET<br />LIFESTYLE</span></div>
-        <div className="progress-portrait"><img src="/images/surya/progress-cutout.png" alt="Surya Singh wearing an olive dress, smiling in a mirror selfie" loading="lazy" /></div>
+        <div className="progress-portrait reveal reveal-fade-right"><img src="/images/surya/progress-cutout.png" alt="Surya Singh wearing an olive dress, smiling in a mirror selfie" loading="lazy" /></div>
         <div className="wrap progress-content">
           <SectionHeading heading={<>{section.title.split("\n")[0]}<br /><span>{section.title.split("\n").slice(1).join(" ")}</span></>} sub={section.subtitle} eyebrow="MORE THAN BEFORE & AFTER" />
           {data.stories.length ? (
             <StoryCards stories={data.stories} />
           ) : (
-            <div className="progress-values">
+            <div className="progress-values reveal-stagger">
               {[
                 [
                   "Strength",
@@ -701,7 +703,7 @@ function HomeSection({ section }: any) {
                   "Feeling more at home in what your body can do.",
                 ],
               ].map(([h, p]) => (
-                <div key={h} className="reveal">
+                <div key={h} className="reveal reveal-card">
                   <span className="progress-mark">{h === "Strength" ? <Dumbbell /> : h === "Consistency" ? <CalendarDays /> : <Heart />}</span>
                   <h3>{h}</h3>
                   <p>{p}</p>
@@ -709,14 +711,14 @@ function HomeSection({ section }: any) {
               ))}
             </div>
           )}
-          <div className="progress-bottom">
+          <div className="progress-bottom reveal delay-1">
             <p>Your starting point is welcome here.</p>
             <Button light to="/book">
               Let’s talk about your goals
             </Button>
           </div>
         </div>
-        <div className="wrap progress-footer">DISCIPLINE TODAY. A STRONGER TOMORROW.</div>
+        <div className="wrap progress-footer reveal delay-2">DISCIPLINE TODAY. A STRONGER TOMORROW.</div>
       </section>
     );
   if (section.id === "journal")
@@ -731,18 +733,18 @@ function HomeSection({ section }: any) {
           <Plane className="travel-plane" /><Mountain className="travel-mountains" /><TreePalm className="travel-palm" />
         </div>
         <div className="wrap travel-layout">
-          <div className="travel-copy">
+          <div className="travel-copy reveal reveal-fade-right">
             <p className="eyebrow">TRAVEL · FITNESS · GOOD FOOD · REAL LIFE</p>
             <p className="travel-kicker">SAME GIRL. DIFFERENT PLACES.</p>
             <h2>Life beyond<br />the <span>workout.</span></h2>
             <p>Exploring new places, finding balance, and staying consistent — because growth happens everywhere.</p>
             <a className="button" href={data.settings.instagram} target="_blank" rel="noreferrer">Follow My Journey <ArrowUpRight size={19} /></a>
-            <div className="travel-values"><span><Dumbbell />Fitness<br />anywhere</span><span><Leaf />Better<br />food choices</span><span><Heart />Happier<br />you</span></div>
+            <div className="travel-values reveal-stagger"><span><Dumbbell />Fitness<br />anywhere</span><span><Leaf />Better<br />food choices</span><span><Heart />Happier<br />you</span></div>
             <p className="travel-note">Collect experiences,<br />not excuses.</p>
           </div>
-          <div className="travel-gallery">
+          <div className="travel-gallery reveal-stagger">
             {(data.settings.travelCards || []).map((card: Entry,i: number)=>(
-              <a className={`travel-card ${i===0 ? "travel-feature" : ""}`} key={i} href={data.settings.instagram} target="_blank" rel="noreferrer">
+              <a className={`travel-card ${i===0 ? "travel-feature" : ""} reveal reveal-card`} key={i} href={data.settings.instagram} target="_blank" rel="noreferrer">
                 <img src={card.image} alt={"Surya — "+card.location} loading="lazy" />
                 <span className="travel-place"><MapPin size={16} />{card.location}</span>
                 <span className="travel-caption">{card.caption}<ArrowUpRight size={20} /></span>
@@ -750,7 +752,7 @@ function HomeSection({ section }: any) {
             ))}
           </div>
         </div>
-        <div className="wrap travel-footer">SAME GOALS. NEW HORIZONS.<span /> DIFFERENT PLACES. SAME YOU.</div>
+        <div className="wrap travel-footer reveal delay-2">SAME GOALS. NEW HORIZONS.<span /> DIFFERENT PLACES. SAME YOU.</div>
       </section>
     );
   return null;
@@ -779,28 +781,28 @@ function Home() {
 function StartBanner() {
   return (
     <section className="chapter-section">
-      <div className="wrap chapter-panel">
-        <div className="chapter-copy">
+      <div className="wrap chapter-panel reveal">
+        <div className="chapter-copy reveal-fade-right">
           <p className="eyebrow">YOU DON’T HAVE TO FIGURE IT OUT ALONE.</p>
           <h2>Ready for your<br /><em>stronger chapter?</em></h2>
           <p>Whether it’s fitness, nutrition, mindset or lifestyle — one conversation can bring clarity and direction. Let’s make your goals a plan.</p>
-          <div className="chapter-benefits">
-            {[[Dumbbell,"Personalised guidance"],[Leaf,"Sustainable nutrition"],[Heart,"Mindset support"],[Sun,"A healthier you"]].map(([Icon,label]: any)=><div key={label}><span><Icon /></span><p>{label}</p></div>)}
+          <div className="chapter-benefits reveal-stagger">
+            {[[Dumbbell,"Personalised guidance"],[Leaf,"Sustainable nutrition"],[Heart,"Mindset support"],[Sun,"A healthier you"]].map(([Icon,label]: any)=><div key={label} className="reveal reveal-card"><span><Icon /></span><p>{label}</p></div>)}
           </div>
           <Button to="/book">Let’s take the first step</Button>
         </div>
-        <div className="chapter-photo"><img src="/images/surya/chapter-reference.png" alt="Surya in a red dress by the sea" loading="lazy" /></div>
-        <div className="chapter-aside"><p className="chapter-handwriting">Same you.<br />Stronger you.</p><div><MapPin /><span>Exploring<br /><strong>New Places</strong></span></div><div><Heart /><span>Building<br /><strong>Healthy Habits</strong></span></div><div><Sun /><span>A Happier,<br /><strong>Stronger Me</strong></span></div></div>
+        <div className="chapter-photo reveal reveal-scale"><img src="/images/surya/chapter-reference.png" alt="Surya in a red dress by the sea" loading="lazy" /></div>
+        <div className="chapter-aside reveal reveal-fade-left"><p className="chapter-handwriting">Same you.<br />Stronger you.</p><div><MapPin /><span>Exploring<br /><strong>New Places</strong></span></div><div><Heart /><span>Building<br /><strong>Healthy Habits</strong></span></div><div><Sun /><span>A Happier,<br /><strong>Stronger Me</strong></span></div></div>
         <div className="chapter-stamp" aria-hidden="true"><Plane /><span>NEW CHAPTER</span></div>
         <TreePalm className="chapter-palm" aria-hidden="true" />
       </div>
-      <div className="wrap chapter-footer"><span><MessageCircle />Real conversations</span><span><Activity />Real progress</span><span>A stronger, happier you</span></div>
+      <div className="wrap chapter-footer reveal delay-1"><span><MessageCircle />Real conversations</span><span><Activity />Real progress</span><span>A stronger, happier you</span></div>
     </section>
   );
 }
 function PageIntro({ label, title: heading, text, children }: any) {
   return (
-    <div className="page-intro wrap">
+    <div className="page-intro wrap reveal">
       <p className="eyebrow">{label}</p>
       <h1>{heading}</h1>
       {text && <p>{text}</p>}
@@ -812,8 +814,8 @@ function Meet() {
   const { data } = useSite();
   return <>
     <section className="about-coach-scene">
-      <div className="about-coach-photo" role="img" aria-label="Surya Singh wearing her blue trainer polo in a gym"><img src="/images/surya/about-trainer-reference.png" alt="" /></div>
-      <div className="about-coach-copy">
+      <div className="about-coach-photo reveal reveal-fade-right" role="img" aria-label="Surya Singh wearing her blue trainer polo in a gym"><img src="/images/surya/about-trainer-reference.png" alt="" /></div>
+      <div className="about-coach-copy reveal reveal-fade-left">
         <p className="eyebrow">MEET SURYA SINGH</p>
         <h1>Your goals deserve<br />a coach <em>who gets it.</em></h1>
         <p className="about-coach-role">FITNESS COACH • PERSONAL TRAINER • LIFESTYLE MENTOR</p>
@@ -827,18 +829,18 @@ function Meet() {
       <div className="about-coach-side" aria-hidden="true">HEALTHIER • HAPPIER • STRONGER YOU</div>
       <div className="about-coach-signature" aria-hidden="true">Surya<span>FITNESS<br />MINDSET<br />DISCIPLINE<br />BALANCE</span></div>
     </section>
-    <section className="about-coach-expect">
+    <section className="about-coach-expect reveal">
       <p className="eyebrow">WHAT YOU CAN EXPECT</p>
       <h2>A coach in your corner.</h2>
-      <div className="about-coach-values">{[
+      <div className="about-coach-values reveal-stagger">{[
         ["Personal Guidance", "Training built around you."],
         ["Practical Nutrition", "Better choices without extremes."],
         ["Consistency", "Small steps you can repeat."],
         ["Real Progress", "Stronger body. Stronger mindset."],
-      ].map(([title, text]) => <div key={title}><h3>{title}</h3><p>{text}</p></div>)}</div>
+      ].map(([title, text]) => <div key={title} className="reveal reveal-card"><h3>{title}</h3><p>{text}</p></div>)}</div>
       <span className="about-coach-note" aria-hidden="true">REAL PEOPLE<br />REAL PROGRESS</span>
     </section>
-    {data.credentials.length > 0 && <section className="wrap section"><SectionHeading eyebrow="COACHING BACKGROUND" heading="Experience behind the guidance." />{data.credentials.map((c: Entry) => <div className="credential" key={c.id}><ShieldCheck /><div><strong>{c.title}</strong><p>{c.issuer} · {c.date}</p>{c.source && <a href={c.source} target="_blank" rel="noreferrer">View source ↗</a>}</div></div>)}</section>}
+    {data.credentials.length > 0 && <section className="wrap section reveal"><SectionHeading eyebrow="COACHING BACKGROUND" heading="Experience behind the guidance." /><div className="reveal-stagger">{data.credentials.map((c: Entry) => <div className="credential reveal reveal-card" key={c.id}><ShieldCheck /><div><strong>{c.title}</strong><p>{c.issuer} · {c.date}</p>{c.source && <a href={c.source} target="_blank" rel="noreferrer">View source ↗</a>}</div></div>)}</div></section>}
   </>;
 }
 function Programmes() {
@@ -1322,10 +1324,10 @@ function Book({ contact = false }: any) {
   if(contact) return <section className="contact-scene">
     <div className="contact-scene-art" aria-hidden="true"><img src="/images/surya/contact-reference.png" alt=""/></div>
     <div className="contact-scene-rings" aria-hidden="true"/>
-    <div className="contact-scene-copy"><p className="eyebrow">LET’S CONNECT</p><h1>A question?<br/><em>Let’s talk.</em></h1><span className="contact-scene-rule"/><p>Tell me a little about you<br/>and where you’d like to go.</p><div className="contact-scene-signature" aria-hidden="true">Same You.<br/><span>Stronger</span><br/>Tomorrow.</div></div>
+    <div className="contact-scene-copy reveal reveal-fade-right"><p className="eyebrow">LET’S CONNECT</p><h1>A question?<br/><em>Let’s talk.</em></h1><span className="contact-scene-rule"/><p>Tell me a little about you<br/>and where you’d like to go.</p><div className="contact-scene-signature" aria-hidden="true">Same You.<br/><span>Stronger</span><br/>Tomorrow.</div></div>
     <p className="contact-scene-motto" aria-hidden="true">DISCIPLINE<br/>CREATES<br/>FREEDOM<span/></p>
-    <div className="contact-scene-panel"><header><h2>Send an Enquiry</h2><span>YOUR GOALS. OUR CONVERSATION.</span></header><EnquiryForm compact/></div>
-    <div className="contact-scene-baseline"><span>DISCIPLINE • PROGRESS • FREEDOM</span><span>A HEALTHIER,<br/>HAPPIER YOU</span></div>
+    <div className="contact-scene-panel reveal reveal-fade-left"><header><h2>Send an Enquiry</h2><span>YOUR GOALS. OUR CONVERSATION.</span></header><EnquiryForm compact/></div>
+    <div className="contact-scene-baseline reveal delay-2"><span>DISCIPLINE • PROGRESS • FREEDOM</span><span>A HEALTHIER,<br/>HAPPIER YOU</span></div>
   </section>;
 
   return (
@@ -1349,9 +1351,9 @@ function Book({ contact = false }: any) {
         }
         text="You don’t need to have it all figured out. Tell Surya a little about where you are and where you’d like to go."
       />
-      {!contact && <div className="wrap consultation-promo"><div><h3>Make your consultation personal.</h3><p>Save your goals, measurements and food routine in your private coaching space.</p></div><Link to="/consultation" className="button">Start consultation <ArrowUpRight size={18}/></Link></div>}
+      {!contact && <div className="wrap consultation-promo reveal"><div><h3>Make your consultation personal.</h3><p>Save your goals, measurements and food routine in your private coaching space.</p></div><Link to="/consultation" className="button">Start consultation <ArrowUpRight size={18}/></Link></div>}
       <div className="wrap contact-grid">
-        <aside>
+        <aside className="reveal reveal-fade-right">
           <div className="contact-note">
             <Sun size={34} strokeWidth={1.5} />
             <h3>
@@ -1410,12 +1412,12 @@ function Book({ contact = false }: any) {
 }
 function StoryCards({ stories }: any) {
   return (
-    <div className="article-grid">
+    <div className="article-grid reveal-stagger">
       {stories.map((s: Entry) => (
         <Link
           key={s.id}
           to={"/transformations/" + s.id}
-          className="article-card"
+          className="article-card reveal reveal-card"
         >
           {s.image && <img src={s.image} alt={s.title} loading="lazy" />}
           <p className="eyebrow">{s.programme || "CLIENT STORY"}</p>
@@ -1442,7 +1444,7 @@ function Transformations() {
           title={s.title}
           text={s.summary}
         />
-        <article className="prose article-body">
+        <article className="prose article-body reveal">
           {s.image && <img src={s.image} alt={s.title} />}
           <p className="preline">{s.body}</p>
           <p>Individual results vary. Shared with permission.</p>
@@ -1453,9 +1455,9 @@ function Transformations() {
   return (
     <>
       <section className="transformations-scene">
-        <div className="transformations-photo" role="img" aria-label="Surya Singh in a black dress at a fitness event"><img src="/images/surya/transformations-reference.png" alt="" /></div>
+        <div className="transformations-photo reveal reveal-fade-right" role="img" aria-label="Surya Singh in a black dress at a fitness event"><img src="/images/surya/transformations-reference.png" alt="" /></div>
         <div className="transformations-atmosphere" aria-hidden="true" />
-        <div className="transformations-copy">
+        <div className="transformations-copy reveal reveal-fade-left">
           <p className="eyebrow">MEET SURYA SINGH</p>
           <h1>More than a number.<br />A stronger <span>everyday.</span></h1>
           <p className="transformations-intro">Progress can mean more strength, a steadier routine<br className="wide-break" /> or simply feeling ready to begin.</p>
@@ -1473,9 +1475,9 @@ function Transformations() {
       {(data.stories.length > 0 || data.testimonials.length > 0) && <section className="wrap section compact">
         {data.stories.length > 0 && <><SectionHeading eyebrow="PERSONAL JOURNEYS" heading="Progress, in their own words." /><StoryCards stories={data.stories} /></>}
         {data.testimonials.length > 0 && (
-          <div className="testimonial-grid">
+          <div className="testimonial-grid reveal-stagger">
             {data.testimonials.map((t: Entry) => (
-              <details key={t.id}>
+              <details key={t.id} className="reveal reveal-card">
                 <summary>
                   <h3>“{t.title}”</h3>
                   <span>{t.name}</span>
@@ -1491,7 +1493,7 @@ function Transformations() {
 }
 function JournalCard({ article: a }: { article: any }) {
   return (
-    <article className="journal-card" key={a.id}>
+    <article className="journal-card reveal reveal-card" key={a.id}>
       <Link to={"/journal/" + a.id} className="journal-card-media-wrap" aria-label={a.title}>
         {a.image ? (
           <img src={a.image} loading="lazy" alt={a.title} />
@@ -1537,7 +1539,7 @@ function FitnessJournalSection({ articles }: { articles: any[] }) {
       </div>
       <div className="journal-container">
         <div className="journal-header-row">
-          <div className="journal-header-left">
+          <div className="journal-header-left reveal reveal-fade-right">
             <div className="journal-eyebrow">
               <span>THE FITNESS JOURNAL</span>
               <span className="journal-eyebrow-dash" />
@@ -1550,7 +1552,7 @@ function FitnessJournalSection({ articles }: { articles: any[] }) {
               Thoughtful reads for a stronger, healthier you.
             </p>
           </div>
-          <div className="journal-header-right">
+          <div className="journal-header-right reveal reveal-fade-left">
             <div className="journal-kicker-stack" aria-hidden="true">
               <span>SMALL</span>
               <span>STEPS</span>
@@ -1562,7 +1564,7 @@ function FitnessJournalSection({ articles }: { articles: any[] }) {
             </Link>
           </div>
         </div>
-        <div className="journal-cards-grid">
+        <div className="journal-cards-grid reveal-stagger">
           {articles.slice(0, 3).map((a: any) => (
             <JournalCard article={a} key={a.id} />
           ))}
@@ -2147,30 +2149,35 @@ function Effects() {
         device: innerWidth < 768 ? "mobile" : "desktop",
       }).catch(() => {});
     }
-    const observer = new IntersectionObserver(
-      (es) =>
-        es.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            observer.unobserve(e.target);
-          }
-        }),
-      { threshold: 0.07 },
-    );
-    document.querySelectorAll(".reveal").forEach((e) => observer.observe(e));
-    const mut = new MutationObserver(() =>
-      document
-        .querySelectorAll(".reveal:not(.visible)")
-        .forEach((e) => observer.observe(e)),
-    );
-    mut.observe(document.getElementById("root")!, {
-      childList: true,
-      subtree: true,
-    });
-    return () => {
-      observer.disconnect();
-      mut.disconnect();
-    };
+    const revealSelector = ".reveal, .reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale, .reveal-card";
+    if (typeof IntersectionObserver !== "undefined") {
+      const observer = new IntersectionObserver(
+        (es) =>
+          es.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              observer.unobserve(e.target);
+            }
+          }),
+        { rootMargin: "0px 0px -40px 0px", threshold: 0.06 },
+      );
+      document.querySelectorAll(revealSelector).forEach((e) => observer.observe(e));
+      const mut = new MutationObserver(() =>
+        document
+          .querySelectorAll(revealSelector + ":not(.visible)")
+          .forEach((e) => observer.observe(e)),
+      );
+      mut.observe(document.getElementById("root")!, {
+        childList: true,
+        subtree: true,
+      });
+      return () => {
+        observer.disconnect();
+        mut.disconnect();
+      };
+    } else {
+      document.querySelectorAll(revealSelector).forEach((e) => e.classList.add("visible"));
+    }
   }, [loc.pathname, data]);
   return null;
 }

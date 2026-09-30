@@ -1049,10 +1049,63 @@ footer {
 .cookie-notice a {
   text-decoration: underline;
 }
-.reveal {
+/* Scroll Reveal System */
+.reveal,
+.reveal-fade-up,
+.reveal-fade-left,
+.reveal-fade-right,
+.reveal-scale,
+.reveal-card {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-left {
+  transform: translateX(-32px);
+}
+
+.reveal-fade-right {
+  transform: translateX(32px);
+}
+
+.reveal-scale {
+  transform: translateY(20px) scale(0.95);
+}
+
+.reveal-card {
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.reveal.visible,
+.reveal-fade-up.visible,
+.reveal-fade-left.visible,
+.reveal-fade-right.visible,
+.reveal-scale.visible,
+.reveal-card.visible {
   opacity: 1;
   transform: none;
 }
+
+/* Stagger container children */
+.reveal-stagger > :nth-child(1) { transition-delay: 50ms; }
+.reveal-stagger > :nth-child(2) { transition-delay: 130ms; }
+.reveal-stagger > :nth-child(3) { transition-delay: 210ms; }
+.reveal-stagger > :nth-child(4) { transition-delay: 290ms; }
+.reveal-stagger > :nth-child(5) { transition-delay: 370ms; }
+.reveal-stagger > :nth-child(6) { transition-delay: 450ms; }
+
+.delay-1 { transition-delay: 90ms !important; }
+.delay-2 { transition-delay: 180ms !important; }
+.delay-3 { transition-delay: 270ms !important; }
+.delay-4 { transition-delay: 360ms !important; }
+
 .page-intro {
   padding-top: 75px;
   padding-bottom: 55px;
@@ -3620,9 +3673,15 @@ td .text-link {
   .hero-scene {
     transform: none;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
+  .reveal,
+  .reveal-fade-up,
+  .reveal-fade-left,
+  .reveal-fade-right,
+  .reveal-scale,
+  .reveal-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 @media print {
@@ -3660,18 +3719,4 @@ td .text-link {
 .skip-link:focus {
   top: 10px;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .reveal.visible {
-    animation: section-arrive 0.65s ease both;
-  }
-  @keyframes section-arrive {
-    from {
-      opacity: 0.4;
-      transform: translateY(18px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-}
+
