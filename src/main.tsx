@@ -47,6 +47,11 @@ import {
   UserRound,
   ChartNoAxesColumnIncreasing,
   MessageCircle,
+  Search,
+  Share2,
+  Clock,
+  BookOpen,
+  Sparkles,
 } from "lucide-react";
 import {
   api,
@@ -70,6 +75,7 @@ import "./footer.css";
 import "./contact-scene.css";
 import "./about-coach.css";
 import "./transformations-scene.css";
+import "./journal.css";
 const icons: any = {
   dumbbell: Dumbbell,
   monitor: Monitor,
@@ -695,14 +701,7 @@ function HomeSection({ section }: any) {
     );
   if (section.id === "journal")
     return data.articles.length ? (
-      <section className="section wrap">
-        <SectionHeading
-          {...common}
-          eyebrow="THE FITNESS JOURNAL"
-          link={{ to: "/journal", text: "Explore the journal" }}
-        />
-        <ArticleCards articles={data.articles.slice(0, 3)} />
-      </section>
+      <FitnessJournalSection articles={data.articles} />
     ) : null;
   if (section.id === "social")
     return (
@@ -1470,113 +1469,391 @@ function Transformations() {
     </>
   );
 }
-function ArticleCards({ articles }: any) {
+function JournalCard({ article: a }: { article: any }) {
   return (
-    <div className="article-grid">
-      {articles.map((a: Entry) => (
-        <Link to={"/journal/" + a.id} className="article-card" key={a.id}>
-          {a.image ? (
-            <img src={a.image} loading="lazy" alt={a.title} />
-          ) : (
-            <div className="article-illustration">
-              <Leaf strokeWidth={1} />
-            </div>
-          )}
-          <p className="eyebrow">
-            {a.category} {a.readTime && " · " + a.readTime}
-          </p>
-          <h3>{a.title}</h3>
-          <p>{a.excerpt}</p>
-          <span className="text-link">
-            Read story <ArrowUpRight size={17} />
-          </span>
-        </Link>
-      ))}
-    </div>
+    <article className="journal-card" key={a.id}>
+      <Link to={"/journal/" + a.id} className="journal-card-media-wrap" aria-label={a.title}>
+        {a.image ? (
+          <img src={a.image} loading="lazy" alt={a.title} />
+        ) : (
+          <div className="article-illustration">
+            <Leaf strokeWidth={1} />
+          </div>
+        )}
+      </Link>
+      <div className="journal-card-body">
+        <div className="journal-card-meta">
+          <span className="journal-card-category">{a.category || "Health & Wellness"}</span>
+          <span className="journal-card-dot">·</span>
+          <span className="journal-card-time">{a.readTime || "4 MIN READ"}</span>
+        </div>
+        <h3 className="journal-card-title">
+          <Link to={"/journal/" + a.id}>{a.title}</Link>
+        </h3>
+        <p className="journal-card-excerpt">{a.excerpt}</p>
+        <div className="journal-card-action">
+          <Link to={"/journal/" + a.id} className="journal-read-link">
+            Read story <ArrowRight size={15} />
+          </Link>
+          <div className="journal-card-bar" />
+        </div>
+      </div>
+    </article>
   );
 }
+
+function FitnessJournalSection({ articles }: { articles: any[] }) {
+  if (!articles || !articles.length) return null;
+  return (
+    <section className="fitness-journal-section" id="fitness-journal">
+      <div className="journal-ambient-bg" aria-hidden="true">
+        <div className="journal-ambient-leaf" />
+        <div className="journal-ambient-script">
+          <span>Move</span>
+          <span>Learn</span>
+          <span>Grow</span>
+        </div>
+      </div>
+      <div className="journal-container">
+        <div className="journal-header-row">
+          <div className="journal-header-left">
+            <div className="journal-eyebrow">
+              <span>THE FITNESS JOURNAL</span>
+              <span className="journal-eyebrow-dash" />
+            </div>
+            <h2 className="journal-headline">
+              <span className="journal-headline-dark">A little knowledge.</span>
+              <span className="journal-headline-accent">A lot of possibility.</span>
+            </h2>
+            <p className="journal-subtitle">
+              Thoughtful reads for a stronger, healthier you.
+            </p>
+          </div>
+          <div className="journal-header-right">
+            <div className="journal-kicker-stack" aria-hidden="true">
+              <span>SMALL</span>
+              <span>STEPS</span>
+              <span>BIG</span>
+              <span>CHANGES</span>
+            </div>
+            <Link to="/journal" className="journal-explore-pill">
+              Explore the Journal <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+        <div className="journal-cards-grid">
+          {articles.slice(0, 3).map((a: any) => (
+            <JournalCard article={a} key={a.id} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Journal() {
   const { data } = useSite();
-  const { id } = useParams(),
-    [lang, setLang] = useState("en");
+  const { id } = useParams();
+  const [lang, setLang] = useState("en");
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [copied, setCopied] = useState(false);
+
+  // Single Article View
   if (id) {
     const a = data.articles.find((x: Entry) => x.id === id);
     if (!a) return <NotFound />;
+    const related = data.articles.filter((x: Entry) => x.id !== id).slice(0, 3);
+
+    const handleShare = () => {
+      if (navigator.share) {
+        navigator.share({ title: a.title, url: location.href }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }
+    };
+
     return (
-      <>
-        <PageIntro
-          label={a.category}
-          title={lang === "hi" ? a.titleHi || a.title : a.title}
-          text={a.excerpt}
-        />
-        <article className="prose article-body">
-          {a.bodyHi && (
-            <div className="filter-row">
+      <div className="article-detail-page">
+        <div className="article-detail-container">
+          <div className="article-top-nav">
+            <Link to="/journal" className="article-back-link">
+              <ArrowLeft size={16} /> Back to Journal
+            </Link>
+            {a.bodyHi && (
+              <div className="article-lang-switch">
+                <button
+                  type="button"
+                  onClick={() => setLang("en")}
+                  className={`article-lang-btn ${lang === "en" ? "active" : ""}`}
+                >
+                  English
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLang("hi")}
+                  className={`article-lang-btn ${lang === "hi" ? "active" : ""}`}
+                >
+                  हिन्दी
+                </button>
+              </div>
+            )}
+          </div>
+
+          <header className="article-header">
+            <div className="article-header-meta">
+              <span className="article-category-badge">{a.category || "Health & Wellness"}</span>
+              {a.readTime && <span className="article-read-time">· {a.readTime}</span>}
+              {a.publishedAt && (
+                <span className="article-read-time">
+                  · {new Date(a.publishedAt).toLocaleDateString("en-IN", { month: "short", day: "numeric", year: "numeric" })}
+                </span>
+              )}
+            </div>
+            <h1 className="article-main-title">
+              {lang === "hi" ? a.titleHi || a.title : a.title}
+            </h1>
+            {a.excerpt && (
+              <p className="article-lead-excerpt">
+                {a.excerpt}
+              </p>
+            )}
+            <div className="article-byline">
+              <img
+                src="/images/surya/hero-selected.png"
+                alt="Surya Singh"
+                className="article-author-avatar"
+              />
+              <div>
+                <strong>{a.author || "Surya Singh"}</strong>
+                <div style={{ fontSize: "12px", opacity: 0.8 }}>Certified Personal Trainer & Nutrition Specialist</div>
+              </div>
+            </div>
+          </header>
+
+          {a.image && (
+            <div className="article-hero-media">
+              <img src={a.image} alt={a.title} />
+            </div>
+          )}
+
+          <article className="article-prose">
+            <div className="preline">{lang === "hi" ? a.bodyHi : a.body}</div>
+
+            <div className="article-tip-box">
+              <h4>🌿 Surya’s Coaching Note</h4>
+              <p>
+                Sustainable health isn’t about extreme restrictions—it is about simple daily rituals that you can stay consistent with. Pick one habit from this read today and practice it for 7 days.
+              </p>
+            </div>
+          </article>
+
+          <div className="article-footer-bar">
+            <button type="button" className="article-share-btn" onClick={handleShare}>
+              {copied ? (
+                <>
+                  <Check size={16} color="#274837" /> Link Copied!
+                </>
+              ) : (
+                <>
+                  <Share2 size={16} /> Share Article
+                </>
+              )}
+            </button>
+            <Button to="/book" className="small">
+              Book a Consultation with Surya
+            </Button>
+          </div>
+
+          {related.length > 0 && (
+            <section className="article-related-section">
+              <h2 className="article-related-title">
+                <Sparkles size={22} color="#274837" /> More from the Journal
+              </h2>
+              <div className="journal-cards-grid">
+                {related.map((rel: any) => (
+                  <JournalCard article={rel} key={rel.id} />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+        <StartBanner />
+      </div>
+    );
+  }
+
+  // Main Journal Index Page
+  const categories = ["All", "Home Remedies", "Fitness & Movement", "Nutrition & Diet", "Mindset & Lifestyle"];
+
+  const filteredArticles = data.articles.filter((art: Entry) => {
+    const matchesCategory =
+      selectedCategory === "All" ||
+      (art.category && art.category.toLowerCase().includes(selectedCategory.toLowerCase())) ||
+      (selectedCategory === "Nutrition & Diet" && (art.category?.includes("Nutrition") || art.category?.includes("Diet"))) ||
+      (selectedCategory === "Mindset & Lifestyle" && (art.category?.includes("Mindset") || art.category?.includes("Lifestyle") || art.category?.includes("Recovery") || art.category?.includes("Sleep")));
+
+    const query = search.trim().toLowerCase();
+    const matchesSearch =
+      !query ||
+      art.title?.toLowerCase().includes(query) ||
+      art.titleHi?.toLowerCase().includes(query) ||
+      art.excerpt?.toLowerCase().includes(query) ||
+      art.body?.toLowerCase().includes(query);
+
+    return matchesCategory && matchesSearch;
+  });
+
+  return (
+    <>
+      <div className="journal-page-hero">
+        <div className="journal-ambient-bg" aria-hidden="true">
+          <div className="journal-ambient-leaf" />
+          <div className="journal-ambient-script">
+            <span>Move</span>
+            <span>Learn</span>
+            <span>Grow</span>
+          </div>
+        </div>
+        <div className="journal-page-hero-inner">
+          <div className="journal-hero-header">
+            <div className="journal-header-left">
+              <div className="journal-eyebrow">
+                <span>THE FITNESS JOURNAL</span>
+                <span className="journal-eyebrow-dash" />
+              </div>
+              <h1 className="journal-headline">
+                <span className="journal-headline-dark">A little knowledge.</span>
+                <span className="journal-headline-accent">A lot of possibility.</span>
+              </h1>
+              <p className="journal-subtitle">
+                Thoughtful ideas about movement, kitchen remedies, nutrition, and sustainable everyday habits.
+              </p>
+            </div>
+            <div className="journal-header-right">
+              <div className="journal-kicker-stack" aria-hidden="true">
+                <span>SMALL</span>
+                <span>STEPS</span>
+                <span>BIG</span>
+                <span>CHANGES</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="journal-hero-controls">
+            <div className="journal-search-wrap">
+              <Search className="search-icon" size={18} />
+              <input
+                type="text"
+                className="journal-search-input"
+                placeholder="Search articles, home remedies, recipes..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              {search && (
+                <button
+                  type="button"
+                  className="journal-search-clear"
+                  onClick={() => setSearch("")}
+                  aria-label="Clear search"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+
+            <div className="journal-categories-bar" role="tablist">
+              {categories.map((cat) => {
+                const count =
+                  cat === "All"
+                    ? data.articles.length
+                    : data.articles.filter((x: any) =>
+                        cat === "Nutrition & Diet"
+                          ? x.category?.includes("Nutrition") || x.category?.includes("Diet")
+                          : cat === "Mindset & Lifestyle"
+                            ? x.category?.includes("Mindset") || x.category?.includes("Lifestyle") || x.category?.includes("Recovery") || x.category?.includes("Sleep")
+                            : x.category?.toLowerCase().includes(cat.toLowerCase())
+                      ).length;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedCategory === cat}
+                    className={`journal-category-chip ${selectedCategory === cat ? "active" : ""}`}
+                    onClick={() => setSelectedCategory(cat)}
+                  >
+                    {cat}
+                    <span className="chip-count">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <main className="journal-listing-section">
+        <div className="journal-container">
+          <div className="journal-results-info">
+            <span className="journal-results-count">
+              Showing <strong>{filteredArticles.length}</strong> {filteredArticles.length === 1 ? "article" : "articles"}
+              {selectedCategory !== "All" && ` in ${selectedCategory}`}
+              {search && ` matching "${search}"`}
+            </span>
+            {(selectedCategory !== "All" || search) && (
               <button
-                onClick={() => setLang("en")}
-                className={lang === "en" ? "active" : ""}
+                type="button"
+                className="text-link"
+                style={{ fontSize: "13px", cursor: "pointer", background: "none", border: "none" }}
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setSearch("");
+                }}
               >
-                English
+                Reset filters
               </button>
+            )}
+          </div>
+
+          {filteredArticles.length > 0 ? (
+            <div className="journal-cards-grid">
+              {filteredArticles.map((a: Entry) => (
+                <JournalCard article={a} key={a.id} />
+              ))}
+            </div>
+          ) : (
+            <div className="journal-empty-state">
+              <BookOpen size={42} strokeWidth={1.5} />
+              <h3>No articles found</h3>
+              <p>We couldn't find any articles matching your search criteria. Try a different keyword or category.</p>
               <button
-                onClick={() => setLang("hi")}
-                className={lang === "hi" ? "active" : ""}
+                type="button"
+                className="button outline small"
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setSearch("");
+                }}
               >
-                हिन्दी
+                View all articles
               </button>
             </div>
           )}
-          <p className="muted">
-            {a.author}{" "}
-            {a.publishedAt &&
-              " · " + new Date(a.publishedAt).toLocaleDateString("en-IN")}
-          </p>
-          {a.image && <img src={a.image} alt={a.title} />}
-          <div className="preline">{lang === "hi" ? a.bodyHi : a.body}</div>
-          <button
-            className="text-link"
-            onClick={() =>
-              navigator.share
-                ? navigator
-                    .share({ title: a.title, url: location.href })
-                    .catch(() => {})
-                : navigator.clipboard.writeText(location.href)
-            }
-          >
-            Share article <ArrowUpRight size={16} />
-          </button>
-        </article>
-        <StartBanner />
-      </>
-    );
-  }
-  return (
-    <>
-      <PageIntro
-        label="THE FITNESS JOURNAL"
-        title={
-          <>
-            A little knowledge.
-            <br />A stronger everyday.
-          </>
-        }
-        text="Thoughtful ideas about movement, habits and finding your own rhythm."
-      />
-      <section className="wrap section compact">
-        {data.articles.length ? (
-          <ArticleCards articles={data.articles} />
-        ) : (
-          <div className="empty-editorial">
-            <Leaf size={48} strokeWidth={1} />
-            <h2>Good things take thought.</h2>
-            <p>
-              Our first articles are being prepared. Join the list to hear when
-              they’re ready.
-            </p>
-            <Newsletter />
-          </div>
-        )}
+        </div>
+      </main>
+
+      <section className="wrap section compact" style={{ borderTop: "1px solid rgba(40,70,55,0.08)" }}>
+        <div className="footer-invitation" style={{ textAlign: "center", maxWidth: "600px", margin: "0 auto 28px" }}>
+          <p className="eyebrow">WEEKLY FITNESS & HEALTH INSIGHTS</p>
+          <h2 style={{ fontSize: "28px" }}>Get thoughtful reads in your inbox.</h2>
+          <p style={{ color: "var(--muted)", fontSize: "15px" }}>Join our community for practical home remedies, workout tips, and clean nutrition guides delivered every week.</p>
+        </div>
+        <Newsletter />
       </section>
+
+      <StartBanner />
     </>
   );
 }
