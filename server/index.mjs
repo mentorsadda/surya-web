@@ -1438,12 +1438,14 @@ if (prod || existsSync(resolve("dist/index.html"))) {
   app.use(express.static(resolve("dist")));
   app.use((_q, r) => r.sendFile(resolve("dist/index.html")));
 } else {
-  const { createServer } = await import("vite");
-  const vite = await createServer({
-    server: { middlewareMode: true, hmr: { port: Number(process.env.PORT || 3040) + 21000 } },
-    appType: "spa",
+  import("vite").then(({ createServer }) => {
+    createServer({
+      server: { middlewareMode: true, hmr: { port: Number(process.env.PORT || 3040) + 21000 } },
+      appType: "spa",
+    }).then((vite) => {
+      app.use(vite.middlewares);
+    });
   });
-  app.use(vite.middlewares);
 }
 const port = Number(process.env.PORT || 3000);
 const host = process.env.HOST || "0.0.0.0";
