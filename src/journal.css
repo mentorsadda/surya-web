@@ -26,8 +26,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 290px;
-  height: 290px;
+  width: 140px;
+  height: 380px;
   background-image: url('/images/journal/leaf-overlay.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -40,8 +40,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 240px;
-  height: 380px;
+  width: 140px;
+  height: 480px;
   background-image: url('/images/journal/studio-mat-overlay.png');
   background-size: contain;
   background-repeat: no-repeat;
