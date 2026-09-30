@@ -3,7 +3,7 @@ import "node:process";
 try {
   process.loadEnvFile();
 } catch {}
-const {
+import {
   db,
   dataDir,
   id,
@@ -18,15 +18,15 @@ const {
   audit,
   transaction,
   bootstrapMatches,
-} = await import("./db.mjs");
-const {
+} from "./db.mjs";
+import {
   queueEmail,
   emailTemplate,
   processOutbox,
   mailConfigured,
   unsubscribeValid,
   baseUrl,
-} = await import("./mail.mjs");
+} from "./mail.mjs";
 import express from "express";
 import helmet from "helmet";
 import multer from "multer";
