@@ -264,19 +264,22 @@
 }
 .reference-handwriting {
   position: absolute;
-  top: 37px;
+  top: 32px;
   right: 5%;
-  font:
-    italic 29px/1.15 Georgia,
-    serif;
+  font-family: 'Caveat', 'Marck Script', 'Satisfy', cursive;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.05;
   transform: rotate(-11deg);
   color: var(--ice);
   text-align: center;
-  opacity: 0.85;
+  opacity: 0.95;
+  text-shadow: 0 2px 10px rgba(7, 39, 55, 0.6);
+  letter-spacing: 0.02em;
 }
 .reference-handwriting svg {
   display: block;
-  margin: 9px auto;
+  margin: 6px auto 0;
 }
 .reference-callouts {
   position: absolute;
@@ -1324,7 +1327,7 @@ footer .eyebrow {
 .coach-reference-section .button{background:#23475b;border-color:#23475b;color:white;padding:18px 26px;}
 .coach-reference-section .button:hover{background:#13364c;}
 .coach-section-watermark{position:absolute;bottom:-.2em;right:0;font-size:clamp(120px,20vw,340px);font-weight:800;line-height:1;color:#507e9710;z-index:-1;pointer-events:none;}
-.coach-note{font-family:cursive;font-style:italic;color:#729fba;line-height:1.1;font-size:24px;transform:rotate(-12deg);text-align:center;margin:25px 0 0 auto;width:155px;}.coach-note svg{display:block;margin:5px auto;}
+.coach-note{font-family:'Caveat','Marck Script','Satisfy',cursive;font-weight:600;font-style:normal;color:#457c9e;line-height:1.05;font-size:32px;transform:rotate(-12deg);text-align:center;margin:20px 0 0 auto;width:170px;letter-spacing:0.02em;}.coach-note svg{display:block;margin:6px auto 0;color:#2f6b8f;}
 .coach-section-bottom{margin-top:40px;display:flex;justify-content:space-between;gap:20px;color:#42677f;font-size:9px;letter-spacing:.2em;}.coach-section-bottom>span:first-child:before{content:"";display:block;width:200px;height:1px;background:#7b9aad;margin-bottom:17px;}
 @media(max-width:1100px){.coach-reference-section .about-grid{gap:32px;}.coach-reference-section .coach-values>span{padding:0 9px;gap:8px;}.coach-note{display:none;}}
 @media(max-width:800px){.coach-reference-section{padding:44px 0 30px;}.coach-reference-section .about-grid{grid-template-columns:1fr;max-width:600px;gap:30px;}.coach-reference-section .about-copy{padding:0;}.coach-reference-section h2{font-size:42px;}.coach-reference-section .eyebrow{margin-bottom:22px;}.coach-section-bottom{flex-direction:column;gap:16px;}.coach-reference-section .coach-values{margin:26px 0;}}
@@ -1472,7 +1475,7 @@ footer .eyebrow {
 .chapter-photo{align-self:stretch;position:relative;overflow:hidden;min-height:470px;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 96%,transparent);}
 .chapter-photo img{position:absolute;max-width:none;width:auto;height:112%;left:50%;top:-6%;transform:translateX(-61%);}
 .chapter-aside{position:relative;z-index:1;padding-left:16px;}
-.chapter-handwriting{font:italic 24px/1.25 Georgia,serif;color:#507e98;transform:rotate(-8deg);margin:0 0 35px;}
+.chapter-handwriting{font-family:'Caveat','Marck Script','Satisfy',cursive;font-size:32px;font-weight:600;line-height:1.1;color:#3d6e88;transform:rotate(-8deg);margin:0 0 28px;letter-spacing:0.02em;}
 .chapter-aside>div{display:flex;align-items:center;gap:12px;background:#ffffffb8;border-bottom:1px solid #d2e6ef;padding:20px 12px;font-size:12px;line-height:1.45;}.chapter-aside>div:nth-child(2){border-radius:16px 16px 0 0;}.chapter-aside>div:last-of-type{border-radius:0 0 16px 16px;}.chapter-aside svg{color:#39728b;flex-shrink:0;}
 .chapter-stamp{position:absolute;top:22px;left:44%;width:80px;height:80px;border:1px solid #6a9cb25c;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#739caf;transform:rotate(-15deg);z-index:1;}.chapter-stamp span{font-size:7px;letter-spacing:.08em;margin-top:5px;}
 .chapter-palm{position:absolute;right:-25px;bottom:-30px;width:160px;height:190px;color:#7da1b526;z-index:-1;}

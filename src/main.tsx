@@ -1512,6 +1512,7 @@ function FitnessJournalSection({ articles }: { articles: any[] }) {
     <section className="fitness-journal-section" id="fitness-journal">
       <div className="journal-ambient-bg" aria-hidden="true">
         <div className="journal-ambient-leaf" />
+        <div className="journal-ambient-mat" />
         <div className="journal-ambient-script">
           <span>Move</span>
           <span>Learn</span>
@@ -1715,6 +1716,7 @@ function Journal() {
       <div className="journal-page-hero">
         <div className="journal-ambient-bg" aria-hidden="true">
           <div className="journal-ambient-leaf" />
+          <div className="journal-ambient-mat" />
           <div className="journal-ambient-script">
             <span>Move</span>
             <span>Learn</span>
