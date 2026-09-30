@@ -1432,7 +1432,7 @@ app.use((e, q, r, n) => {
         : "Unable to save this request. Check the fields and try again.",
   });
 });
-if (prod) {
+if (prod || existsSync(resolve("dist/index.html"))) {
   app.use(express.static(resolve("dist")));
   app.use((_q, r) => r.sendFile(resolve("dist/index.html")));
 } else {
@@ -1443,16 +1443,21 @@ if (prod) {
   });
   app.use(vite.middlewares);
 }
-const port = Number(process.env.PORT || 3000),
-  host = process.env.HOST || "0.0.0.0";
-app.listen(port, host, () => {
-  console.log(`Train with Surya: http://${host}:${port}`);
+const port = Number(process.env.PORT || 3000);
+const host = process.env.HOST;
+const onListen = () => {
+  console.log(`Train with Surya listening on port ${port} (host: ${host || "all"})`);
   if (existsSync(join(dataDir, "bootstrap-token.txt")))
     console.log(
       "First-time admin setup key is in " +
         join(dataDir, "bootstrap-token.txt"),
     );
-});
+};
+if (host) {
+  app.listen(port, host, onListen);
+} else {
+  app.listen(port, onListen);
+}
 const timer = setInterval(() => {
   processOutbox().catch(console.error);
   const horizon = new Date(

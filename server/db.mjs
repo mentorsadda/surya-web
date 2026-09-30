@@ -15,8 +15,8 @@ import {
 } from "node:crypto";
 import { initialSettings, programmes, draftArticles } from "./seed.mjs";
 export const dataDir = resolve(process.env.DATA_DIR || "data");
-mkdirSync(dataDir, { recursive: true, mode: 0o700 });
-mkdirSync(join(dataDir, "uploads"), { recursive: true, mode: 0o700 });
+mkdirSync(dataDir, { recursive: true, mode: 0o755 });
+mkdirSync(join(dataDir, "uploads"), { recursive: true, mode: 0o755 });
 export const db = new DatabaseSync(join(dataDir, "surya.sqlite"));
 db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;
 CREATE TABLE IF NOT EXISTS settings(id INTEGER PRIMARY KEY CHECK(id=1),data TEXT NOT NULL);
