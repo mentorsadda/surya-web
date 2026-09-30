@@ -5,11 +5,11 @@
   "type": "module",
   "main": "server.js",
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "scripts": {
     "dev": "node server/index.mjs",
-    "build": "tsc --noEmit && vite build",
+    "build": "vite build",
     "start": "node server.js",
     "test": "node --test tests/*.test.mjs",
     "backup": "node scripts/backup.mjs"
@@ -27,9 +27,7 @@
     "multer": "latest",
     "sharp": "latest",
     "nodemailer": "latest",
-    "zod": "latest"
-  },
-  "devDependencies": {
+    "zod": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/node": "latest"

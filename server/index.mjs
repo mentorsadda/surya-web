@@ -1434,7 +1434,7 @@ app.use((e, q, r, n) => {
 });
 if (prod) {
   app.use(express.static(resolve("dist")));
-  app.get("/{*path}", (_q, r) => r.sendFile(resolve("dist/index.html")));
+  app.use((_q, r) => r.sendFile(resolve("dist/index.html")));
 } else {
   const { createServer } = await import("vite");
   const vite = await createServer({
@@ -1443,8 +1443,8 @@ if (prod) {
   });
   app.use(vite.middlewares);
 }
-const port = Number(process.env.PORT || 3040),
-  host = process.env.HOST || "127.0.0.1";
+const port = Number(process.env.PORT || 3000),
+  host = process.env.HOST || "0.0.0.0";
 app.listen(port, host, () => {
   console.log(`Train with Surya: http://${host}:${port}`);
   if (existsSync(join(dataDir, "bootstrap-token.txt")))
