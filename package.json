@@ -31,8 +31,5 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/node": "latest"
-  },
-  "optionalDependencies": {
-    "better-sqlite3": "latest"
   }
 }

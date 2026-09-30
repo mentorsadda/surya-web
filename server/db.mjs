@@ -1,16 +1,5 @@
-let DatabaseSync;
-try {
-  const sqlite = await import("node:sqlite");
-  DatabaseSync = sqlite.DatabaseSync;
-} catch (e) {
-  try {
-    const betterSqlite = await import("better-sqlite3");
-    DatabaseSync = betterSqlite.default || betterSqlite;
-  } catch (e2) {
-    console.error("SQLite module error:", e);
-    throw e;
-  }
-}
+import { DatabaseSync } from "node:sqlite";
+
 import {
   mkdirSync,
   existsSync,
