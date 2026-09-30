@@ -591,31 +591,47 @@ function HomeSection({ section }: any) {
         </div></div></div>
       </section>
     );
-  if (section.id === "about")
+  if (section.id === "about") {
+    const coachPhoto = section.photo || data.settings.coachSectionPhoto || "/images/surya/coach-section-reference.png";
+    const coachWatermark = section.watermark || data.settings.coachWatermark || "/images/surya/coach-watermark.png";
+    const eyebrow = section.eyebrow || "MEET YOUR COACH";
+    const coachText = section.text || data.settings.aboutText || "Surya’s approach to coaching starts with understanding. Her own fitness journey taught her the value of showing up, building confidence and making progress one step at a time. Now she brings that personal perspective to every coaching conversation.";
+    const val1 = section.value1 || "Empathy\nFirst";
+    const val2 = section.value2 || "Strength\nfor Life";
+    const val3 = section.value3 || "Your\nOwn Pace";
+    const btnText = section.buttonText || "A little more about Surya";
+    const btnLink = section.buttonLink || "/meet-surya";
+    const noteText = section.note || "Stronger\nHealthier\nHappier You";
+    const bottom1 = section.bottomText1 || "DISCIPLINE TODAY. A STRONGER TOMORROW.";
+    const bottom2 = section.bottomText2 || "FITNESS · NUTRITION · MINDSET · LIFESTYLE";
+
     return (
       <section className="about-section coach-reference-section" id="meet-your-coach">
         <div className="coach-section-watermark" aria-hidden="true">SURYA</div>
         <div className="wrap about-grid">
           <div className="about-photo supplied-coach-photo reveal">
-            <img loading="lazy" src="/images/surya/coach-section-reference.png" alt="Surya Singh, fitness coach and personal trainer, seated in a blue shirt in the gym" />
+            <img loading="lazy" src={coachPhoto} alt="Surya Singh, fitness coach and personal trainer" />
           </div>
           <div className="about-copy reveal">
-            <img className="coach-person-watermark" src="/images/surya/coach-watermark.png" alt="" aria-hidden="true" loading="lazy" />
-            <p className="eyebrow">MEET YOUR COACH</p>
+            <img className="coach-person-watermark" src={coachWatermark} alt="" aria-hidden="true" loading="lazy" />
+            <p className="eyebrow">{eyebrow}</p>
             <h2>{section.title.split("\n")[0]}<br /><span>{section.title.split("\n").slice(1).join(" ")}</span></h2>
-            <p>{data.settings.aboutText}</p>
+            <p>{coachText}</p>
             <div className="coach-values">
-              <span><Dumbbell /><span>Empathy<br />First</span></span>
-              <span><Leaf /><span>Strength<br />for Life</span></span>
-              <span><Heart /><span>Your<br />Own Pace</span></span>
+              <span><Dumbbell /><span>{val1.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
+              <span><Leaf /><span>{val2.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
+              <span><Heart /><span>{val3.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)}</span></span>
             </div>
-            <Button to="/meet-surya">A little more about Surya</Button>
-            <div className="coach-note" aria-hidden="true">Stronger<br />Healthier<br />Happier You <Heart size={27} /></div>
+            <Button to={btnLink}>{btnText}</Button>
+            <div className="coach-note" aria-hidden="true">
+              {noteText.split("\n").map((line: string, idx: number) => <React.Fragment key={idx}>{idx > 0 && <br />}{line}</React.Fragment>)} <Heart size={27} />
+            </div>
           </div>
         </div>
-        <div className="wrap coach-section-bottom"><span>DISCIPLINE TODAY. A STRONGER TOMORROW.</span><span>FITNESS · NUTRITION · MINDSET · LIFESTYLE</span></div>
+        <div className="wrap coach-section-bottom"><span>{bottom1}</span><span>{bottom2}</span></div>
       </section>
     );
+  }
   if (section.id === "method")
     return (
       <section className="section method approach-reference" id="surya-approach">

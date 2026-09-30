@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+@font-face {
+  font-family: "Birmingham Signature";
+  src: url("/fonts/birmingham-signature.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  --font-signature: "Birmingham Signature", "Marck Script", "Caveat", "Satisfy", cursive;
   --paper: #f1f4f5;
   --ink: #242c31;
   --green: #2c3a42;
@@ -454,14 +464,14 @@ em {
   border: none;
   padding: 0;
   display: block;
-  font-family: 'Caveat', 'Marck Script', 'Satisfy', cursive;
-  font-size: 32px;
-  font-weight: 600;
+  font-family: var(--font-signature, 'Birmingham Signature', 'Marck Script', 'Caveat', 'Satisfy', cursive);
+  font-size: 34px;
+  font-weight: 500;
   color: #457c9e;
   transform: rotate(-12deg);
   text-align: center;
   margin: 24px 0 0 auto;
-  width: 170px;
+  width: 180px;
   letter-spacing: 0.02em;
 }
 .coach-tag {
@@ -1352,23 +1362,44 @@ textarea,
 select {
   width: 100%;
   border: 1px solid #c9d1d6;
-  border-radius: 7px;
-  padding: 12px 13px;
+  border-radius: 8px;
+  padding: 12px 14px;
   background: #fbfcfd;
   color: var(--ink);
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 48px;
   min-width: 0;
+  box-sizing: border-box;
+}
+input:not([type="checkbox"], [type="range"], [type="file"]),
+.field input {
+  height: 48px;
 }
 input::placeholder,
 textarea::placeholder {
   color: #8094a0;
-  font-size: 12px;
+  font-size: 13px;
 }
 textarea {
   resize: vertical;
+  min-height: 90px;
 }
-select {
-  min-height: 44px;
+select,
+.field select {
+  height: 48px;
+  padding-right: 40px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338576d' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 15px 15px;
+  cursor: pointer;
+}
+select::-ms-expand {
+  display: none;
 }
 .checkline {
   display: flex;
@@ -1792,8 +1823,12 @@ select {
 }
 .toolbar > select {
   width: auto;
-  max-width: 160px;
-  font-size: 12px;
+  min-width: 190px;
+  max-width: 280px;
+  min-height: 44px;
+  height: 44px;
+  font-size: 13px;
+  padding: 8px 36px 8px 14px;
 }
 .searchbox {
   display: flex;
@@ -1841,7 +1876,13 @@ select {
   font-size: 11px;
 }
 .record-row > select {
-  max-width: 130px;
+  width: auto;
+  min-width: 170px;
+  max-width: 240px;
+  min-height: 42px;
+  height: 42px;
+  font-size: 13px;
+  padding: 6px 34px 6px 12px;
 }
 .workspace-empty {
   padding: 50px 25px;
@@ -2031,7 +2072,11 @@ td .text-link {
   width: 100%;
 }
 .booking-row select {
-  max-width: 280px;
+  min-width: 240px;
+  max-width: 100%;
+  min-height: 46px;
+  height: 46px;
+  font-size: 13px;
 }
 .recipient-list {
   max-height: 290px;

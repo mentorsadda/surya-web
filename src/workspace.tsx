@@ -959,13 +959,43 @@ function SettingsPanel({ overview, reload }: any) {
                 ))}
               </fieldset>
             ))}
-            <Field label="About Surya">
-              <textarea
-                rows={6}
-                value={b.aboutText}
-                onChange={(e) => set("aboutText", e.target.value)}
-              />
-            </Field>
+            <fieldset>
+              <legend>Meet Coach / About Surya Story & Featured Photo</legend>
+              <Field label="Coach featured photo">
+                <MediaUpload
+                  value={b.coachSectionPhoto || "/images/surya/coach-section-reference.png"}
+                  onChange={(v: string) => {
+                    set("coachSectionPhoto", v);
+                    if (b.sections) {
+                      set(
+                        "sections",
+                        b.sections.map((x: Entry) =>
+                          x.id === "about" ? { ...x, photo: v } : x,
+                        ),
+                      );
+                    }
+                  }}
+                />
+              </Field>
+              <Field label="About Surya (Coach story & bio paragraph)">
+                <textarea
+                  rows={6}
+                  value={b.aboutText}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    set("aboutText", val);
+                    if (b.sections) {
+                      set(
+                        "sections",
+                        b.sections.map((x: Entry) =>
+                          x.id === "about" ? { ...x, text: val } : x,
+                        ),
+                      );
+                    }
+                  }}
+                />
+              </Field>
+            </fieldset>
           </>
         )}
         {tab === "Travel gallery" && <>
@@ -1087,6 +1117,169 @@ function SettingsPanel({ overview, reload }: any) {
                           }
                         />
                       </Field>
+                    </>
+                  )}
+                  {s.id === "about" && (
+                    <>
+                      <Field label="Coach featured portrait photo">
+                        <MediaUpload
+                          value={s.photo || b.coachSectionPhoto || "/images/surya/coach-section-reference.png"}
+                          onChange={(v: string) => {
+                            set(
+                              "sections",
+                              b.sections.map((x: Entry, j: number) =>
+                                i === j ? { ...x, photo: v } : x,
+                              ),
+                            );
+                            set("coachSectionPhoto", v);
+                          }}
+                        />
+                      </Field>
+                      <Field label="Coach watermark silhouette image (behind text)">
+                        <MediaUpload
+                          value={s.watermark || b.coachWatermark || "/images/surya/coach-watermark.png"}
+                          onChange={(v: string) => {
+                            set(
+                              "sections",
+                              b.sections.map((x: Entry, j: number) =>
+                                i === j ? { ...x, watermark: v } : x,
+                              ),
+                            );
+                            set("coachWatermark", v);
+                          }}
+                        />
+                      </Field>
+                      <Field label="Coach story & bio text">
+                        <textarea
+                          rows={5}
+                          value={s.text || b.aboutText || "Surya’s approach to coaching starts with understanding. Her own fitness journey taught her the value of showing up, building confidence and making progress one step at a time. Now she brings that personal perspective to every coaching conversation."}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            set(
+                              "sections",
+                              b.sections.map((x: Entry, j: number) =>
+                                i === j ? { ...x, text: val } : x,
+                              ),
+                            );
+                            set("aboutText", val);
+                          }}
+                          placeholder="Enter coach bio and approach..."
+                        />
+                      </Field>
+                      <div className="form-grid">
+                        <Field label="Core value 1 (Icon: Dumbbell)">
+                          <input
+                            value={s.value1 || "Empathy\nFirst"}
+                            onChange={(e) =>
+                              set(
+                                "sections",
+                                b.sections.map((x: Entry, j: number) =>
+                                  i === j ? { ...x, value1: e.target.value } : x,
+                                ),
+                              )
+                            }
+                            placeholder="e.g. Empathy First"
+                          />
+                        </Field>
+                        <Field label="Core value 2 (Icon: Leaf)">
+                          <input
+                            value={s.value2 || "Strength\nfor Life"}
+                            onChange={(e) =>
+                              set(
+                                "sections",
+                                b.sections.map((x: Entry, j: number) =>
+                                  i === j ? { ...x, value2: e.target.value } : x,
+                                ),
+                              )
+                            }
+                            placeholder="e.g. Strength for Life"
+                          />
+                        </Field>
+                        <Field label="Core value 3 (Icon: Heart)">
+                          <input
+                            value={s.value3 || "Your\nOwn Pace"}
+                            onChange={(e) =>
+                              set(
+                                "sections",
+                                b.sections.map((x: Entry, j: number) =>
+                                  i === j ? { ...x, value3: e.target.value } : x,
+                                ),
+                              )
+                            }
+                            placeholder="e.g. Your Own Pace"
+                          />
+                        </Field>
+                      </div>
+                      <div className="form-grid">
+                        <Field label="Button text">
+                          <input
+                            value={s.buttonText || "A little more about Surya"}
+                            onChange={(e) =>
+                              set(
+                                "sections",
+                                b.sections.map((x: Entry, j: number) =>
+                                  i === j ? { ...x, buttonText: e.target.value } : x,
+                                ),
+                              )
+                            }
+                          />
+                        </Field>
+                        <Field label="Button destination (link)">
+                          <input
+                            value={s.buttonLink || "/meet-surya"}
+                            onChange={(e) =>
+                              set(
+                                "sections",
+                                b.sections.map((x: Entry, j: number) =>
+                                  i === j ? { ...x, buttonLink: e.target.value } : x,
+                                ),
+                              )
+                            }
+                          />
+                        </Field>
+                      </div>
+                      <Field label="Handwritten signature note (bottom right)">
+                        <textarea
+                          rows={2}
+                          value={s.note || "Stronger\nHealthier\nHappier You"}
+                          onChange={(e) =>
+                            set(
+                              "sections",
+                              b.sections.map((x: Entry, j: number) =>
+                                i === j ? { ...x, note: e.target.value } : x,
+                              ),
+                            )
+                          }
+                        />
+                      </Field>
+                      <div className="form-grid">
+                        <Field label="Bottom banner left text">
+                          <input
+                            value={s.bottomText1 || "DISCIPLINE TODAY. A STRONGER TOMORROW."}
+                            onChange={(e) =>
+                              set(
+                                "sections",
+                                b.sections.map((x: Entry, j: number) =>
+                                  i === j ? { ...x, bottomText1: e.target.value } : x,
+                                ),
+                              )
+                            }
+                          />
+                        </Field>
+                        <Field label="Bottom banner right text">
+                          <input
+                            value={s.bottomText2 || "FITNESS · NUTRITION · MINDSET · LIFESTYLE"}
+                            onChange={(e) =>
+                              set(
+                                "sections",
+                                b.sections.map((x: Entry, j: number) =>
+                                  i === j ? { ...x, bottomText2: e.target.value } : x,
+                                ),
+                              )
+                            }
+                          />
+                        </Field>
+                      </div>
                     </>
                   )}
                   <button
