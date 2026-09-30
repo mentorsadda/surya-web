@@ -164,55 +164,211 @@ function WorkspaceShell({
   );
 }
 export function MediaUpload({ value, onChange, privateFile = false }: any) {
-  const a = useAction(),
-    canvasRef = useRef<HTMLCanvasElement>(null);
-  const [src, setSrc] = useState(""),
-    [crop, setCrop] = useState({ zoom: 1, x: 50, y: 50, ratio: "1" }),
-    [alt, setAlt] = useState(""),
-    [approved, setApproved] = useState(false);
+  const a = useAction();
+  const [src, setSrc] = useState("");
+  const [dragOver, setDragOver] = useState(false);
+  const [alt, setAlt] = useState("");
+  const [approved, setApproved] = useState(true);
+  const [ratioMode, setRatioMode] = useState<"free" | "original" | "1:1" | "4:5" | "16:9">("1:1");
+  const [box, setBox] = useState({ x: 10, y: 10, w: 80, h: 80 }); // percentages (0 - 100)
+  const [imgMeta, setImgMeta] = useState({ nw: 1, nh: 1, aspect: 1 });
+
+  const stageRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const fileRef = useRef<File | null>(null);
+
+  // Load image when src changes
   useEffect(() => {
     if (!src) return;
     const img = new window.Image();
     img.onload = () => {
       imageRef.current = img;
-      draw();
+      const nw = img.naturalWidth || 800;
+      const nh = img.naturalHeight || 800;
+      const aspect = nw / nh;
+      setImgMeta({ nw, nh, aspect });
+      
+      // Initialize box based on default ratio
+      applyRatio("1:1", nw, nh);
     };
     img.src = src;
     return () => URL.revokeObjectURL(src);
   }, [src]);
-  const draw = () => {
-    const c = canvasRef.current,
-      img = imageRef.current;
-    if (!c || !img) return;
-    const ratio = Number(crop.ratio);
-    c.width = 800;
-    c.height = 800 / ratio;
-    const scale =
-      Math.max(c.width / img.width, c.height / img.height) * crop.zoom;
-    const w = img.width * scale,
-      h = img.height * scale;
-    const ctx = c.getContext("2d")!;
-    ctx.fillStyle = "#f6f3ed";
-    ctx.fillRect(0, 0, c.width, c.height);
-    ctx.drawImage(
-      img,
-      (-(w - c.width) * crop.x) / 100,
-      (-(h - c.height) * crop.y) / 100,
-      w,
-      h,
-    );
+
+  const applyRatio = (mode: "free" | "original" | "1:1" | "4:5" | "16:9", nw = imgMeta.nw, nh = imgMeta.nh) => {
+    setRatioMode(mode);
+    if (mode === "original") {
+      setBox({ x: 0, y: 0, w: 100, h: 100 });
+      return;
+    }
+    const imgAspect = nw / nh;
+    let targetAspect = 1;
+    if (mode === "4:5") targetAspect = 4 / 5;
+    if (mode === "16:9") targetAspect = 16 / 9;
+
+    if (mode === "free") {
+      setBox({ x: 10, y: 10, w: 80, h: 80 });
+      return;
+    }
+
+    // Fit maximum target box within the image aspect
+    if (targetAspect >= imgAspect) {
+      // Box is wider or equal relative to image
+      const wPercent = 90;
+      const hPercent = (wPercent * imgAspect) / targetAspect;
+      const x = (100 - wPercent) / 2;
+      const y = (100 - hPercent) / 2;
+      setBox({ x: Math.max(0, x), y: Math.max(0, y), w: Math.min(100, wPercent), h: Math.min(100, hPercent) });
+    } else {
+      // Box is taller relative to image
+      const hPercent = 90;
+      const wPercent = (hPercent * targetAspect) / imgAspect;
+      const x = (100 - wPercent) / 2;
+      const y = (100 - hPercent) / 2;
+      setBox({ x: Math.max(0, x), y: Math.max(0, y), w: Math.min(100, wPercent), h: Math.min(100, hPercent) });
+    }
   };
-  useEffect(draw, [crop]);
+
+  // Draw real-time preview canvas
+  const updatePreview = () => {
+    const canvas = previewCanvasRef.current;
+    const img = imageRef.current;
+    if (!canvas || !img || !img.naturalWidth) return;
+
+    const sx = (box.x / 100) * img.naturalWidth;
+    const sy = (box.y / 100) * img.naturalHeight;
+    const sw = (box.w / 100) * img.naturalWidth;
+    const sh = (box.h / 100) * img.naturalHeight;
+
+    if (sw <= 0 || sh <= 0) return;
+
+    canvas.width = Math.min(600, Math.round(sw));
+    canvas.height = Math.round(canvas.width * (sh / sw));
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+  };
+
+  useEffect(updatePreview, [box, src]);
+
+  // Pointer drag and resize handler
+  const handlePointerDown = (handle: string, e: React.PointerEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const stage = stageRef.current;
+    if (!stage) return;
+    const rect = stage.getBoundingClientRect();
+    const startClientX = e.clientX;
+    const startClientY = e.clientY;
+    const initialBox = { ...box };
+
+    const onPointerMove = (moveEv: PointerEvent) => {
+      const dxPercent = ((moveEv.clientX - startClientX) / rect.width) * 100;
+      const dyPercent = ((moveEv.clientY - startClientY) / rect.height) * 100;
+
+      if (handle === "move") {
+        const nextX = Math.max(0, Math.min(100 - initialBox.w, initialBox.x + dxPercent));
+        const nextY = Math.max(0, Math.min(100 - initialBox.h, initialBox.y + dyPercent));
+        setBox({ ...initialBox, x: nextX, y: nextY });
+        return;
+      }
+
+      let newX = initialBox.x;
+      let newY = initialBox.y;
+      let newW = initialBox.w;
+      let newH = initialBox.h;
+
+      // Handle horizontal adjustments
+      if (handle.includes("e")) {
+        newW = Math.max(10, Math.min(100 - initialBox.x, initialBox.w + dxPercent));
+      } else if (handle.includes("w")) {
+        const proposedW = initialBox.w - dxPercent;
+        if (proposedW >= 10 && initialBox.x + dxPercent >= 0) {
+          newX = initialBox.x + dxPercent;
+          newW = proposedW;
+        }
+      }
+
+      // Handle vertical adjustments
+      if (handle.includes("s")) {
+        newH = Math.max(10, Math.min(100 - initialBox.y, initialBox.h + dyPercent));
+      } else if (handle.includes("n")) {
+        const proposedH = initialBox.h - dyPercent;
+        if (proposedH >= 10 && initialBox.y + dyPercent >= 0) {
+          newY = initialBox.y + dyPercent;
+          newH = proposedH;
+        }
+      }
+
+      // If aspect ratio is locked (not free and not original)
+      if (ratioMode !== "free" && ratioMode !== "original") {
+        let targetAspect = 1;
+        if (ratioMode === "4:5") targetAspect = 4 / 5;
+        if (ratioMode === "16:9") targetAspect = 16 / 9;
+
+        // Convert percentage box to pixel aspect ratio
+        const imgAspect = imgMeta.aspect || 1;
+        // pixel width = newW * rect.width, pixel height = newH * rect.height
+        // desired: (newW * imgAspect) / newH = targetAspect => newH = (newW * imgAspect) / targetAspect
+        if (handle === "e" || handle === "w" || handle === "se" || handle === "sw") {
+          newH = (newW * imgAspect) / targetAspect;
+          if (newY + newH > 100) {
+            newH = 100 - newY;
+            newW = (newH * targetAspect) / imgAspect;
+          }
+        } else {
+          newW = (newH * targetAspect) / imgAspect;
+          if (newX + newW > 100) {
+            newW = 100 - newX;
+            newH = (newW * imgAspect) / targetAspect;
+          }
+        }
+      }
+
+      setBox({
+        x: Math.max(0, Math.min(100 - newW, newX)),
+        y: Math.max(0, Math.min(100 - newH, newY)),
+        w: Math.max(10, Math.min(100, newW)),
+        h: Math.max(10, Math.min(100, newH)),
+      });
+    };
+
+    const onPointerUp = () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+    };
+
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+  };
+
+  const handleFile = (f: File) => {
+    fileRef.current = f;
+    setSrc(URL.createObjectURL(f));
+  };
+
   const upload = () =>
     a.run(async () => {
-      if (!canvasRef.current) throw Error("Choose an image first.");
-      const blob = await new Promise<Blob | null>((r) =>
-        canvasRef.current!.toBlob(r, "image/jpeg", 0.94),
-      );
+      if (!previewCanvasRef.current || !imageRef.current) throw Error("Choose an image first.");
+
+      let blob: Blob | null = null;
+      if (ratioMode === "original" && box.x === 0 && box.y === 0 && box.w === 100 && box.h === 100 && fileRef.current) {
+        blob = fileRef.current;
+      } else {
+        blob = await new Promise<Blob | null>((r) =>
+          previewCanvasRef.current!.toBlob(r, "image/jpeg", 0.95),
+        );
+      }
+
       if (!blob) throw Error("Image could not be prepared.");
       const f = new FormData();
-      f.append("file", blob, "crop.jpg");
+      f.append("file", blob, fileRef.current?.name?.replace(/\.[^.]+$/, ".jpg") || "photo.jpg");
       f.append("alt", alt);
       f.append("keyword", alt || "coaching");
       f.append("approved", String(approved));
@@ -220,101 +376,191 @@ export function MediaUpload({ value, onChange, privateFile = false }: any) {
       const r = await api("/media", { method: "POST", body: f });
       onChange(r.url);
       setSrc("");
-      return { message: "Image uploaded. Save the record to attach it." };
+      return { message: "Image uploaded and applied successfully! Save changes to record." };
     });
+
   return (
     <div className="media-upload">
       {value && (
         <div className="media-current">
           <img src={value} alt="Current upload" />
-          <button
-            type="button"
-            className="text-link"
-            onClick={() => onChange("")}
-          >
-            Remove from this record
-          </button>
-        </div>
-      )}
-      <label className="upload-label">
-        <Upload size={18} />
-        {value ? "Replace image" : "Upload & crop image"}
-        <input
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
-          onChange={(e) => {
-            const f = e.target.files?.[0];
-            if (f) {
-              setCrop({ zoom: 1, x: 50, y: 50, ratio: "1" });
-              setSrc(URL.createObjectURL(f));
-            }
-          }}
-        />
-      </label>
-      <small>
-        JPG, PNG or WebP · up to 8 MB. Portrait 1200×1500; cover 1600×1000;
-        square 1200×1200.
-      </small>
-      {src && (
-        <div className="crop-editor">
-          <canvas ref={canvasRef} />
           <div>
-            <Field label="Crop shape">
-              <select
-                value={crop.ratio}
-                onChange={(e) => setCrop({ ...crop, ratio: e.target.value })}
-              >
-                <option value="1">Square</option>
-                <option value="0.8">Portrait 4:5</option>
-                <option value="1.6">Landscape 8:5</option>
-              </select>
-            </Field>
-            {(["zoom", "x", "y"] as const).map((k) => (
-              <Field
-                key={k}
-                label={
-                  k === "zoom"
-                    ? "Zoom"
-                    : k === "x"
-                      ? "Horizontal focus"
-                      : "Vertical focus"
-                }
-              >
-                <input
-                  type="range"
-                  min={k === "zoom" ? 1 : 0}
-                  max={k === "zoom" ? 3 : 100}
-                  step={0.01}
-                  value={crop[k]}
-                  onChange={(e) =>
-                    setCrop({ ...crop, [k]: Number(e.target.value) })
-                  }
-                />
-              </Field>
-            ))}
-            <Field label="Image description / alt text">
-              <input value={alt} onChange={(e) => setAlt(e.target.value)} />
-            </Field>
-            {!privateFile && (
-              <label className="checkline">
-                <input
-                  type="checkbox"
-                  checked={approved}
-                  onChange={(e) => setApproved(e.target.checked)}
-                />
-                Approved for website use
-              </label>
-            )}
-            <ActionButton type="button" disabled={a.busy} onClick={upload}>
-              Crop & upload
-            </ActionButton>
+            <p style={{ margin: "0 0 6px 0", fontSize: "12px", color: "#25485d", fontWeight: 600 }}>Active Image</p>
             <button
               type="button"
               className="text-link"
-              onClick={() => setSrc("")}
+              onClick={() => onChange("")}
             >
-              Cancel
+              Remove image
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Drag & Drop Upload Zone */}
+      <div
+        className={`media-dropzone ${dragOver ? "drag-active" : ""}`}
+        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setDragOver(false);
+          const f = e.dataTransfer.files?.[0];
+          if (f) handleFile(f);
+        }}
+      >
+        <label className="upload-label" style={{ margin: 0, width: "100%", justifyContent: "center" }}>
+          <Upload size={20} />
+          <span>{value ? "Choose or drop new image to replace" : "Click to select or Drag & Drop image here"}</span>
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) handleFile(f);
+            }}
+          />
+        </label>
+      </div>
+
+      <small style={{ display: "block", marginTop: "6px", color: "#618194" }}>
+        JPG, PNG or WebP · High quality resolution · Drag corners or move the selection box to choose the exact visible area.
+      </small>
+
+      {/* Interactive Visual Cropper Modal / Stage */}
+      {src && (
+        <div className="crop-editor-interactive">
+          <div className="crop-editor-header">
+            <h4>📐 Drag & Resize Visible Area</h4>
+            <div className="crop-ratio-pills">
+              <button
+                type="button"
+                className={`pill ${ratioMode === "free" ? "active" : ""}`}
+                onClick={() => applyRatio("free")}
+              >
+                Free Resize
+              </button>
+              <button
+                type="button"
+                className={`pill ${ratioMode === "original" ? "active" : ""}`}
+                onClick={() => applyRatio("original")}
+              >
+                Full Image (100%)
+              </button>
+              <button
+                type="button"
+                className={`pill ${ratioMode === "1:1" ? "active" : ""}`}
+                onClick={() => applyRatio("1:1")}
+              >
+                Square (1:1)
+              </button>
+              <button
+                type="button"
+                className={`pill ${ratioMode === "4:5" ? "active" : ""}`}
+                onClick={() => applyRatio("4:5")}
+              >
+                Portrait (4:5)
+              </button>
+              <button
+                type="button"
+                className={`pill ${ratioMode === "16:9" ? "active" : ""}`}
+                onClick={() => applyRatio("16:9")}
+              >
+                Landscape (16:9)
+              </button>
+            </div>
+          </div>
+
+          <div className="crop-workspace-grid">
+            {/* Left: Interactive Drag-and-Resize Stage */}
+            <div className="crop-stage-container">
+              <p className="stage-hint">🖱️ <strong>Drag inside box</strong> to move · <strong>Drag handles</strong> to resize selection</p>
+              <div
+                ref={stageRef}
+                className="crop-stage"
+                style={{
+                  aspectRatio: `${imgMeta.nw} / ${imgMeta.nh}`,
+                }}
+              >
+                {/* Background Image */}
+                <img src={src} alt="Source for cropping" className="crop-stage-bg" />
+
+                {/* Scrim Overlay (4 dark rectangles around box) */}
+                <div className="crop-scrim" style={{ top: 0, left: 0, right: 0, height: `${box.y}%` }} />
+                <div className="crop-scrim" style={{ top: `${box.y + box.h}%`, left: 0, right: 0, bottom: 0 }} />
+                <div className="crop-scrim" style={{ top: `${box.y}%`, left: 0, width: `${box.x}%`, height: `${box.h}%` }} />
+                <div className="crop-scrim" style={{ top: `${box.y}%`, left: `${box.x + box.w}%`, right: 0, height: `${box.h}%` }} />
+
+                {/* Interactive Crop Selection Box */}
+                <div
+                  className="crop-box"
+                  style={{
+                    left: `${box.x}%`,
+                    top: `${box.y}%`,
+                    width: `${box.w}%`,
+                    height: `${box.h}%`,
+                  }}
+                  onPointerDown={(e) => handlePointerDown("move", e)}
+                >
+                  {/* Grid Lines (Rule of Thirds) */}
+                  <div className="crop-grid-h h1" />
+                  <div className="crop-grid-h h2" />
+                  <div className="crop-grid-v v1" />
+                  <div className="crop-grid-v v2" />
+
+                  {/* Corner Handles */}
+                  <div className="crop-handle handle-nw" onPointerDown={(e) => handlePointerDown("nw", e)} />
+                  <div className="crop-handle handle-ne" onPointerDown={(e) => handlePointerDown("ne", e)} />
+                  <div className="crop-handle handle-sw" onPointerDown={(e) => handlePointerDown("sw", e)} />
+                  <div className="crop-handle handle-se" onPointerDown={(e) => handlePointerDown("se", e)} />
+
+                  {/* Edge Handles */}
+                  <div className="crop-handle handle-n" onPointerDown={(e) => handlePointerDown("n", e)} />
+                  <div className="crop-handle handle-s" onPointerDown={(e) => handlePointerDown("s", e)} />
+                  <div className="crop-handle handle-w" onPointerDown={(e) => handlePointerDown("w", e)} />
+                  <div className="crop-handle handle-e" onPointerDown={(e) => handlePointerDown("e", e)} />
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Live Result Preview & Actions */}
+            <div className="crop-preview-card">
+              <h5>Live Result Preview</h5>
+              <div className="preview-canvas-wrapper">
+                <canvas ref={previewCanvasRef} />
+              </div>
+              <p className="preview-caption">
+                Selection: {Math.round(box.w)}% × {Math.round(box.h)}%
+              </p>
+
+              <Field label="Image description / alt text (optional)">
+                <input value={alt} onChange={(e) => setAlt(e.target.value)} placeholder="e.g. Surya coaching in gym" />
+              </Field>
+
+              {!privateFile && (
+                <label className="checkline" style={{ margin: "10px 0" }}>
+                  <input
+                    type="checkbox"
+                    checked={approved}
+                    onChange={(e) => setApproved(e.target.checked)}
+                  />
+                  Approved for public website use
+                </label>
+              )}
+
+              <div className="crop-actions">
+                <ActionButton type="button" disabled={a.busy} onClick={upload}>
+                  Apply & Upload Selection
+                </ActionButton>
+                <button
+                  type="button"
+                  className="text-link"
+                  onClick={() => setSrc("")}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

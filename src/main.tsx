@@ -592,7 +592,7 @@ function HomeSection({ section }: any) {
       </section>
     );
   if (section.id === "about") {
-    const coachPhoto = section.photo || data.settings.coachSectionPhoto || "/images/surya/coach-section-reference.png";
+    const coachPhoto = section.photo || data.settings.coachSectionPhoto || "/images/surya/coach-section-portrait.png";
     const coachWatermark = section.watermark || data.settings.coachWatermark || "/images/surya/coach-watermark.png";
     const eyebrow = section.eyebrow || "MEET YOUR COACH";
     const coachText = section.text || data.settings.aboutText || "Surya’s approach to coaching starts with understanding. Her own fitness journey taught her the value of showing up, building confidence and making progress one step at a time. Now she brings that personal perspective to every coaching conversation.";
