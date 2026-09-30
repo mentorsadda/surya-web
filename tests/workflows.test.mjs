@@ -81,7 +81,7 @@ test("secure coaching workflows and durable persistence", async (t) => {
       assert.equal(p.settings.whatsapp, "918299375609");
       assert.equal(p.settings.email, "surya737singh@gmail.com");
       assert.equal(p.programmes.length, 5);
-      assert.equal(p.articles.length, 0);
+      assert.equal(p.articles.length, 6);
       assert.equal(p.credentials.length, 0);
     });
     await t.test("travel gallery admin edits persist and reject invalid cards", async () => {

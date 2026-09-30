@@ -136,6 +136,7 @@ function Header() {
         <NavLink to="/meet-surya">About Surya</NavLink>
         <NavLink to="/programmes">Programmes</NavLink>
         <NavLink to="/transformations">Transformations</NavLink>
+        <NavLink to="/journal">Blog</NavLink>
         <NavLink to="/contact">Contact</NavLink>
         <Link
           className="mobile-only"
