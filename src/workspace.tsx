@@ -856,7 +856,7 @@ function SettingsPanel({ overview, reload }: any) {
           "Brand & contact",
           "Hero & story",
           "Travel gallery",
-          "Sections",
+          "Homepage sections",
           "Booking",
           "Programme finder",
           "Policies",
@@ -978,57 +978,138 @@ function SettingsPanel({ overview, reload }: any) {
             <Field label="Caption"><textarea required maxLength={180} rows={2} value={card.caption} onChange={e=>set("travelCards",b.travelCards.map((x: Entry,j: number)=>i===j?{...x,caption:e.target.value}:x))} /></Field>
           </fieldset>)}
         </>}
-        {tab === "Sections" &&
-          b.sections.map((s: Entry, i: number) => (
-            <fieldset key={s.id}>
-              <legend>{s.id}</legend>
-              <label className="checkline">
-                <input
-                  type="checkbox"
-                  checked={s.enabled}
-                  onChange={(e) =>
-                    set(
-                      "sections",
-                      b.sections.map((x: Entry, j: number) =>
-                        i === j ? { ...x, enabled: e.target.checked } : x,
-                      ),
-                    )
-                  }
-                />
-                Show section
-              </label>
-              {["title", "subtitle"].map((k) => (
-                <Field key={k} label={k}>
-                  <textarea
-                    value={s[k]}
-                    onChange={(e) =>
-                      set(
-                        "sections",
-                        b.sections.map((x: Entry, j: number) =>
-                          i === j ? { ...x, [k]: e.target.value } : x,
-                        ),
-                      )
-                    }
-                  />
-                </Field>
-              ))}
-              <button
-                type="button"
-                disabled={!i}
-                className="text-link"
-                onClick={() => {
-                  const sections = [...b.sections];
-                  [sections[i], sections[i - 1]] = [
-                    sections[i - 1],
-                    sections[i],
-                  ];
-                  set("sections", sections);
-                }}
-              >
-                ↑ Move up
-              </button>
-            </fieldset>
-          ))}
+        {tab === "Homepage sections" && (
+          <>
+            <p className="field-hint" style={{ marginBottom: "20px" }}>
+              Customise the headings, subtitles, and background watermarks for each section on the homepage.
+              To edit individual programme cards or blog posts, use the <strong>Programmes</strong> or <strong>Journal</strong> tabs on the left sidebar menu.
+            </p>
+            {b.sections.map((s: Entry, i: number) => {
+              const friendlyNames: Record<string, string> = {
+                programmes: "1. Programmes Section ('A little direction. A stronger you.')",
+                about: "2. Meet Surya / About Coach Section ('She knows what starting feels like.')",
+                method: "3. The Surya Approach / Method Section ('Big changes start with small steps.')",
+                transformations: "4. Transformations & Client Stories Section ('Progress looks different on everyone.')",
+                journal: "5. The Fitness Journal / Blog Section ('A little knowledge. A lot of possibility.')",
+              };
+              return (
+                <fieldset key={s.id} style={{ marginBottom: "24px" }}>
+                  <legend style={{ fontWeight: 700 }}>
+                    {friendlyNames[s.id] || s.id}
+                  </legend>
+                  <label className="checkline" style={{ marginBottom: "14px" }}>
+                    <input
+                      type="checkbox"
+                      checked={s.enabled}
+                      onChange={(e) =>
+                        set(
+                          "sections",
+                          b.sections.map((x: Entry, j: number) =>
+                            i === j ? { ...x, enabled: e.target.checked } : x,
+                          ),
+                        )
+                      }
+                    />
+                    Show section on homepage
+                  </label>
+                  {s.id === "programmes" && (
+                    <p className="field-hint" style={{ background: "#eef4f0", padding: "10px 14px", borderRadius: "8px", margin: "0 0 14px 0", color: "#274837" }}>
+                      💡 <strong>Note:</strong> To change the 3 programme cards (photos, prices, descriptions, and inclusions), click <strong>"Programmes"</strong> on the left menu.
+                    </p>
+                  )}
+                  <Field label="Eyebrow text">
+                    <input
+                      value={s.eyebrow || (s.id === "programmes" ? "FIND YOUR WAY FORWARD" : "")}
+                      onChange={(e) =>
+                        set(
+                          "sections",
+                          b.sections.map((x: Entry, j: number) =>
+                            i === j ? { ...x, eyebrow: e.target.value } : x,
+                          ),
+                        )
+                      }
+                      placeholder="e.g. FIND YOUR WAY FORWARD"
+                    />
+                  </Field>
+                  <Field label="Main title (use a new line to split headline)">
+                    <textarea
+                      rows={2}
+                      value={s.title}
+                      onChange={(e) =>
+                        set(
+                          "sections",
+                          b.sections.map((x: Entry, j: number) =>
+                            i === j ? { ...x, title: e.target.value } : x,
+                          ),
+                        )
+                      }
+                    />
+                  </Field>
+                  <Field label="Subtitle / description">
+                    <textarea
+                      rows={2}
+                      value={s.subtitle}
+                      onChange={(e) =>
+                        set(
+                          "sections",
+                          b.sections.map((x: Entry, j: number) =>
+                            i === j ? { ...x, subtitle: e.target.value } : x,
+                          ),
+                        )
+                      }
+                    />
+                  </Field>
+                  {s.id === "programmes" && (
+                    <>
+                      <Field label="Section background watermark image (optional)">
+                        <MediaUpload
+                          value={s.watermark || "/images/surya/coach-watermark.png"}
+                          onChange={(v: string) =>
+                            set(
+                              "sections",
+                              b.sections.map((x: Entry, j: number) =>
+                                i === j ? { ...x, watermark: v } : x,
+                              ),
+                            )
+                          }
+                        />
+                      </Field>
+                      <Field label="Bottom motto / banner text">
+                        <input
+                          value={s.motto || "STRONG BODY. CLEAR MIND. CONFIDENT YOU."}
+                          onChange={(e) =>
+                            set(
+                              "sections",
+                              b.sections.map((x: Entry, j: number) =>
+                                i === j ? { ...x, motto: e.target.value } : x,
+                              ),
+                            )
+                          }
+                        />
+                      </Field>
+                    </>
+                  )}
+                  <button
+                    type="button"
+                    disabled={!i}
+                    className="text-link"
+                    style={{ marginTop: "10px" }}
+                    onClick={() => {
+                      const sections = [...b.sections];
+                      [sections[i], sections[i - 1]] = [
+                        sections[i - 1],
+                        sections[i],
+                      ];
+                      set("sections", sections);
+                    }}
+                  >
+                    ↑ Move section up
+                  </button>
+                </fieldset>
+              );
+            })}
+          </>
+        )}
         {tab === "Booking" && (
           <>
             <Field label="Booking mode">

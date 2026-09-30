@@ -526,6 +526,13 @@ function SectionHeading({ eyebrow, heading, sub, link }: any) {
 }
 function ProgrammeCard({ p, index, referencePhoto = false }: any) {
   const Icon = icons[p.icon] || Dumbbell;
+  const imageSrc =
+    p.image ||
+    (referencePhoto
+      ? "/images/surya/programmes-reference.png"
+      : ["nutrition-support", "online-coaching"].includes(p.id)
+        ? "/images/surya/coach-blue.webp"
+        : "/images/surya/hero-blue.webp");
   return (
     <Link
       to={"/programmes/" + p.id}
@@ -535,14 +542,9 @@ function ProgrammeCard({ p, index, referencePhoto = false }: any) {
         <span>0{index + 1}</span>
         <ArrowUpRight />
       </div>
-      <div className={`programme-photo ${referencePhoto ? "supplied-programme-photo supplied-photo-" + index : ""}`}>
+      <div className={`programme-photo ${!p.image && referencePhoto ? "supplied-programme-photo supplied-photo-" + index : ""}`}>
         <img
-          src={
-            referencePhoto ? "/images/surya/programmes-reference.png" : p.image ||
-            (["nutrition-support", "online-coaching"].includes(p.id)
-              ? "/images/surya/coach-blue.webp"
-              : "/images/surya/hero-blue.webp")
-          }
+          src={imageSrc}
           alt={"Surya Singh — " + title(p.title)}
           loading="lazy"
         />
@@ -567,19 +569,21 @@ function HomeSection({ section }: any) {
   if (section.id === "programmes")
     return (
       <section className="section programmes-reference-section" id="programmes">
-        <div className="programmes-portrait-watermark" aria-hidden="true"><img src="/images/surya/coach-watermark.png" alt="" loading="lazy" /></div>
+        <div className="programmes-portrait-watermark" aria-hidden="true">
+          <img src={section.watermark || data.settings.programmesWatermark || "/images/surya/coach-watermark.png"} alt="" loading="lazy" />
+        </div>
         <div className="wrap">
         <SectionHeading
-          heading={<>{section.title.split("\n")[0]}<br /><span>{section.title.split("\n").slice(1).join(" ")}</span></>}
+          heading={<>{(section.title || "A little direction.\nA stronger you.").split("\n")[0]}<br /><span>{(section.title || "A little direction.\nA stronger you.").split("\n").slice(1).join(" ")}</span></>}
           sub={section.subtitle}
-          eyebrow="FIND YOUR WAY FORWARD"
+          eyebrow={section.eyebrow || "FIND YOUR WAY FORWARD"}
         />
         <div className="programme-grid">
           {data.programmes.slice(0, 3).map((p: Entry, i: number) => (
-            <ProgrammeCard key={p.id} p={p} index={i} referencePhoto />
+            <ProgrammeCard key={p.id} p={p} index={i} referencePhoto={!p.image} />
           ))}
         </div>
-        <div className="programmes-bottom"><span className="programmes-motto">STRONG BODY. CLEAR MIND. CONFIDENT YOU.</span><div className="under-note">
+        <div className="programmes-bottom"><span className="programmes-motto">{section.motto || "STRONG BODY. CLEAR MIND. CONFIDENT YOU."}</span><div className="under-note">
           Not sure where to start?{" "}
           <Link to="/finder">
             Let’s find your fit <ArrowRight size={18} />
