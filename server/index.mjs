@@ -35,8 +35,10 @@ import { join, resolve } from "node:path";
 import { existsSync, readFileSync, unlinkSync } from "node:fs";
 import { createHmac, timingSafeEqual } from "node:crypto";
 export const app = express();
-const prod = process.env.NODE_ENV === "production";
+app.set("trust proxy", 1);
 app.disable("x-powered-by");
+app.get("/health", (_q, r) => r.status(200).send("OK"));
+const prod = process.env.NODE_ENV === "production";
 app.use(
   helmet({
     contentSecurityPolicy: prod
@@ -1444,20 +1446,16 @@ if (prod || existsSync(resolve("dist/index.html"))) {
   app.use(vite.middlewares);
 }
 const port = Number(process.env.PORT || 3000);
-const host = process.env.HOST;
+const host = process.env.HOST || "0.0.0.0";
 const onListen = () => {
-  console.log(`Train with Surya listening on port ${port} (host: ${host || "all"})`);
+  console.log(`Train with Surya listening on http://${host}:${port}`);
   if (existsSync(join(dataDir, "bootstrap-token.txt")))
     console.log(
       "First-time admin setup key is in " +
         join(dataDir, "bootstrap-token.txt"),
     );
 };
-if (host) {
-  app.listen(port, host, onListen);
-} else {
-  app.listen(port, onListen);
-}
+app.listen(port, host, onListen);
 const timer = setInterval(() => {
   processOutbox().catch(console.error);
   const horizon = new Date(
